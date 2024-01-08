@@ -1,4 +1,4 @@
 
 export default function FeederFood() {
-  return <div className="container">Carp food</div>;
+  return <div className="container">Feederfood</div>;
 }

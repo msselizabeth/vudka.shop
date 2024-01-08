@@ -1,11 +1,11 @@
-import { CarpMenu } from "../../../components/Carp/CarpMenu";
-
+import { MainNavLinksMenu } from "../../../components/MainNavLinksMenu/MainNavLinksMenu";
+import { feederMenu } from "../../../data/feeder";
 
 export default function FeederLayout({ children }) {
   return (
-      <>
-          {/* <CarpMenu/> */}
-          {children}
-        </>
+    <>
+      <MainNavLinksMenu title={"Рибаловля на фідер"} menu={feederMenu} />
+      {children}
+    </>
   );
 }

@@ -1,5 +1,5 @@
 
 
 export default function CarpReels() {
-  return <div className="container">Carp reels</div>;
+  return <div className="container">ALL Carp reels</div>;
 }

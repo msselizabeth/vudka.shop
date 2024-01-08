@@ -15,7 +15,8 @@
     text-align: center;
 }
 .hero__logo{
-    margin-top: 22px;
+    padding-top: 22px;
+    padding-bottom: 75px;
     text-transform: uppercase;
     color: var(--primary-links-color);
     font-family: var(--font-rubik);
@@ -26,8 +27,8 @@
     display: block;
     width: 130px;
     padding: 10px 10px 10px 10px;
-    margin: 80px auto 0px auto;
-    background: #136773;
+    margin: 0px auto 0px auto;
+    background: var(--buttons-back-color);
     color: var(--primary-links-color);
     font-weight: 700;
     text-align: center;
@@ -37,6 +38,7 @@
 }
 
 @media screen and (min-width:425px) {
+    
     .hero__title{
         font-size: 20px;
     }
@@ -45,5 +47,79 @@
     }
     .hero__link{
         font-size: 18px;
+    }
+}
+
+@media screen and (min-width:768px) {
+    .hero__container {
+        padding: 20px;
+            background-image: linear-gradient(to right,
+                    rgba(0, 20, 49, 0.5),
+                    rgba(0, 20, 49, 0.5)), url("/hero/hero-tablet.webp");
+    }
+    .hero__title {
+        width: 370px;
+        margin: 0 auto;
+        font-size: 26px;
+
+    }
+
+    .hero__logo {
+        padding-top: 40px;
+        padding-bottom: 130px;
+        font-size: 30px;
+    }
+
+    .hero__link {
+        width: 150px;
+        font-size: 22px;
+    }
+}
+
+@media screen and (min-width:1024px) {
+    .hero__container {
+        background-image: linear-gradient(to right,
+                rgba(0, 20, 49, 0.5),
+                rgba(0, 20, 49, 0.5)), url("/hero/hero-laptop.webp");
+    }
+
+    .hero__title {
+        width: 450px;
+        font-size: 30px;
+    }
+
+    .hero__logo {
+        font-size: 38px;
+    }
+
+    .hero__link {
+        width: 200px;
+        font-size: 26px;
+    }
+}
+
+@media screen and (min-width:1440px) {
+    .hero__container {
+        padding: 30px;
+        background-image: linear-gradient(to right,
+                rgba(0, 20, 49, 0.5),
+                rgba(0, 20, 49, 0.5)), url("/hero/hero-laptop.webp");
+    }
+
+    .hero__title {
+        width: 480px;
+        font-size: 34px;
+
+    }
+
+    .hero__logo {
+        padding-top: 60px;
+        padding-bottom: 160px;
+        font-size: 44px;
+    }
+
+    .hero__link {
+        width: 250px;
+        font-size: 28px;
     }
 }

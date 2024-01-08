@@ -1,0 +1,46 @@
+.buy__btn{
+    width: 100px;
+    padding: 10px;
+    background-color: var(--buttons-back-color);
+    border-radius: 30px;
+    box-shadow: 0px 0px 10px 2px var(--box-shadow-color) ;
+    color: var(--primary-links-color);
+    font-weight: 700;
+    transition: var(--transition);
+
+}
+.buy__btn:hover, .buy__btn:focus {
+    color: var(--icons-color-hover);
+    background: var(--primary-links-color);
+}
+
+@media screen and (min-width:425px) {
+    .buy__btn{
+        width: 130px;
+        font-size: 16px;
+    }
+}
+
+@media screen and (min-width:768px) {
+    .buy__btn {
+        width: 130px;
+        font-size: 18px;
+        padding: 12px;
+    }
+}
+
+@media screen and (min-width:1024px) {
+    .buy__btn {
+        width: 150px;
+        font-size: 20px;
+        padding: 14px;
+    }
+}
+
+@media screen and (min-width:1440px) {
+    .buy__btn {
+        width: 180px;
+        font-size: 22px;
+        padding: 16px;
+    }
+}

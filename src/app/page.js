@@ -1,12 +1,15 @@
-
-import Link from 'next/link'
-import styles from './page.module.css'
-import Image from 'next/image'
+import Link from "next/link";
+import styles from "./page.module.css";
+import Image from "next/image";
+import { test } from "../../data/test";
+import { ReelProduct } from "../../components/Reels/ReelProduct";
 
 export default function Home() {
+  console.log(test.img);
+
   return (
     <>
-      <section className="section">
+      <section className="hero-section">
         <div className={styles.hero__container}>
           <h1 className={styles.hero__title}>
             Супермаркет рибальських та туристичних товарів
@@ -18,7 +21,7 @@ export default function Home() {
         </div>
       </section>
 
-     
+      <ReelProduct />
     </>
   );
 }

@@ -25,13 +25,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="uk">
       <body className={`${rubik.variable} ${roboto.variable}`}>
-        <main>
-          <header>
-            <Header />
-          </header>
-          {children}
-          <footer></footer>
-        </main>
+        <header>
+          <Header />
+        </header>
+        <main>{children}</main>
+        <footer></footer>
       </body>
     </html>
   );

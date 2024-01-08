@@ -1,5 +1,5 @@
 
 
 export default function FeederEquip() {
-  return <div className="container">Carp equipment</div>;
+  return <div className="container">Feeder equipment</div>;
 }

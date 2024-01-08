@@ -1,14 +1,16 @@
 import { Suspense } from "react";
 import Loading from "@/app/loading";
 import { MainNavLinksInnerMenu } from "../../../../components/MainNavLinksInnerMenu/MainNavLinksInnerMenu";
-import { carpReelsMenu } from "../../../../data/caprReelsMenu";
-
+import { carpFoodMenu } from "../../../../data/carpFoodMenu";
 
 export default function CarpReelsLayout({ children }) {
   return (
     <>
-      <Suspense fallback={<Loading/>}>
-        <MainNavLinksInnerMenu title={"Коропові катушки"} menu={carpReelsMenu} />
+      <Suspense fallback={<Loading />}>
+        <MainNavLinksInnerMenu
+          title={"Коропова їжа"}
+          menu={carpFoodMenu}
+        />
       </Suspense>
       {children}
     </>

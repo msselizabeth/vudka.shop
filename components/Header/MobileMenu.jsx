@@ -7,6 +7,7 @@ import { MobInnerMenuIcon } from "../icons/MobInnerMenuIcon";
 import Link from "next/link";
 import { carpMenu } from "../../data/carp";
 import { feederMenu } from "../../data/feeder";
+import { predatorMenu } from "../../data/predator";
 
 export const MobileMenu = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -15,6 +16,7 @@ export const MobileMenu = () => {
   const [innerMenuStates, setInnerMenuStates] = useState({
     carp: false,
     feeder: false,
+    predator: false,
   });
 
   const toggleInnerMenu = (menu) => {
@@ -155,8 +157,48 @@ export const MobileMenu = () => {
                   })}
                 </ul>
               </li>
+
               <li>Поплавець</li>
-              <li>Хижак</li>
+
+
+
+              <li>
+                <div className={styles.mob__item__cont}>
+                  <Link
+                    href="/predator"
+                    className={styles.mob__link}
+                    onClick={toggleMenu}
+                  >
+                    Хижак
+                  </Link>
+                  <button
+                    className={styles.mob__inner__btn}
+                    type="button"
+                    onClick={() => toggleInnerMenu("predator")}
+                  >
+                    <MobInnerMenuIcon />
+                  </button>
+                </div>
+                <ul
+                  className={`${styles.mob__inner__list} ${
+                    innerMenuStates.predator ? styles.active : ""
+                  }`}
+                >
+                  {predatorMenu.map(({ id, path, name }) => {
+                    return (
+                      <li ket={id} className={styles.mob__inner__item}>
+                        <Link
+                          href={path}
+                          className={styles.mob__link}
+                          onClick={toggleMenu}
+                        >
+                          {name}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </li>
               <li>З човна</li>
               <li>Море</li>
               <li>Норвегія</li>

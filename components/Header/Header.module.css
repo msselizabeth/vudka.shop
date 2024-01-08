@@ -40,6 +40,35 @@
         width: 100px;
         height: 100px;
     }
-  
     
+}
+@media screen and (min-width:768px) {
+    .header__container {
+        height: 120px;
+    }
+    .main__nav{
+        width: 728px;
+        margin: 0 auto;
+        padding: 10px 0px;
+    }
+    .logo__img{
+        width: 95px;
+        height: 95px;
+    }
+
+    .logo__text {
+        font-size: 22px;
+    }
+
+    .logo__img {
+        width: 100px;
+        height: 100px;
+    }
+
+}
+
+@media screen and (min-width:1440px) {
+    .main__nav{
+        width: 1380px;
+    }
 }

@@ -31,7 +31,7 @@ export const carpMenu = [
   },
   {
     id: 7,
-    path: "/carp/carp-food",
+    path: "/carp/food",
     name: "Коропова їжа",
   },
   {
