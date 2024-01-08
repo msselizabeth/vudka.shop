@@ -1,0 +1,259 @@
+:root {
+    --color-primary-text: rgb(90, 3, 25);
+    --color-titles-section: rgb(130, 3, 25);
+    --color-hero-text: rgba(90, 3, 25, 0.90);
+    --icons-gradient: linear-gradient(rgba(196, 194, 61, 0.85), rgba(251, 152, 3, 0.85));
+    --hover-gradient: linear-gradient(180deg, rgba(5, 177, 95, 0.90) 0%, rgba(255, 251, 3, 0.90) 100%);
+    --color-shadow: rgba(90, 3, 25, 0.25);
+
+    --background-color-primary: rgba(245, 242, 142, 0.10);
+    --background-color-header-footer: rgba(255, 168, 0, 0.85);
+    --background-color-mob-menu: rgba(255, 168, 0, 0.55);
+    --box-shadow-color-header-footer: rgba(184, 125, 10, 0.40);
+}
+
+
+body {
+    color: var(--color-primary-text);
+    font-size: 16px;
+    line-height: 1.22;
+    background-image: url('/food-fon.png');
+    background-color: var(--background-color-primary);
+    background-size: 375px 290px;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    border: 0;
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    display: block;
+}
+
+.section__title {
+    position: relative;
+    width: 100%;
+    max-width: 450px;
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 28px;
+        left: 0px;
+        bottom: 50%;
+        transform: translateY(50%);
+        display: block;
+        width: 100%;
+        height: 2px;
+        border-radius: 25px;
+        background-color: var(--color-titles-line);
+
+    }
+
+    font-family: var(--font-family-titles);
+    font-size: 18px;
+    color: var(--color-titles-section);
+    margin-bottom: 15px;
+}
+
+.section {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 0px;
+}
+
+.container {
+    padding: 0px 10px;
+    margin: 0 auto;
+}
+
+@media screen and (min-width:480px) {
+    body {
+        background-size: 480px 370px;
+    }
+
+    .section {
+        width: 480px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    body {
+        background-size: 768px 520px;
+        font-size: 17px;
+    }
+
+    .section__title {
+        max-width: 768px;
+        font-size: 24px;
+        margin-bottom: 20px;
+
+        &::after {
+            top: 40px;
+        }
+    }
+
+    .section {
+        width: 768px;
+        padding: 40px 0px;
+    }
+
+    .container {
+        width: 738px;
+        padding: 0px 15px;
+    }
+}
+
+@media screen and (min-width:1000px) {
+    .section {
+        width: 1000px;
+        padding: 45px 0px;
+    }
+
+    .section__title {
+        max-width: 1000px;
+        font-size: 26px;
+        margin-bottom: 25px;
+
+        &::after {
+            top: 40px;
+        }
+    }
+
+    .container {
+        width: 960px;
+        padding: 0px 20px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    body {
+        font-size: 20px;
+    }
+
+    .section {
+        width: 1200px;
+        padding: 50px 0px;
+    }
+
+    .container {
+        width: 1160px;
+    }
+
+    .section__title {
+        max-width: 1200px;
+
+        &::after {
+            top: 45px;
+        }
+    }
+
+}
+
+@media screen and (min-width: 1440px) {
+    body {
+        font-size: 22px;
+    }
+
+    .section {
+        width: 1440px;
+        padding: 35px 0px;
+    }
+
+    .section__title {
+        max-width: 1440px;
+        font-size: 30px;
+        margin-bottom: 30px;
+
+        &::after {
+            top: 50px;
+        }
+    }
+
+    .container {
+        width: 1390px;
+        padding: 0px 25px;
+    }
+}
+
+// .current {
+//     color: transparent;
+//     background-clip: text;
+//     background-image: var(--hover-gradient);
+//     padding-left: 21px;
+
+//     &::after {
+//         content: "";
+//         position: absolute;
+//         top: 2px;
+//         left: 0;
+//         width: 20px;
+//         height: 20px;
+//         background-size: cover;
+//         background-image: url("/current.svg");
+//     }
+
+// }
+
+
+// @media screen and (min-width:1000px) {
+//     .current {
+//         padding-left: 18px;
+
+//         &::after {
+//             top: 1px;
+//             left: 0;
+//             width: 16px;
+//             height: 16px;
+
+//         }
+//     }
+// }
+
+// @media screen and (min-width:1200px) {
+//     .current {
+//         padding-left: 21px;
+
+//         &::after {
+//             width: 19px;
+//             height: 19px;
+//         }
+//     }
+// }
+
+// @media screen and (min-width:1440px) {
+//     .current {
+//         padding-left: 23px;
+
+//         &::after {
+//             width: 22px;
+//             height: 22px;
+
+//         }
+//     }
+// }

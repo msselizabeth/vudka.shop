@@ -1,0 +1,400 @@
+.footer {
+    background-color: #ffffff;
+    width: 100%;
+    box-shadow: 4px 0px 35px 0px var(--box-shadow-color-header-footer);
+}
+
+.bgContainer {
+    width: 100%;
+    padding: 15px 0px;
+    background-color: var(--background-color-header-footer);
+}
+
+.footerLogo {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 46px;
+    color: var(--color-primary-titles);
+    font-size: 22px;
+    transition: background-image 250ms cubic-bezier(0.4, 0, 0.2, 1), color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover, &:focus {
+            color: transparent;
+            background-clip: text;
+            background-image: var(--hover-gradient);
+    }
+
+    &DecorWord {
+            margin-left: 72px;
+    }
+       
+    &::after {
+            content: "";
+            position: absolute;
+            bottom: 0px;
+            right: 72px;
+            width: 65px;
+            height: 46px;
+            background-size: cover;
+            background-image: url("/logo-icon.svg");
+            transition: background-image 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    }
+    &:hover::after,
+    &:focus::after {
+            background-image: url("/logo-icon-hover.svg");
+        
+    }
+}
+
+.footerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 35px;
+}
+
+.footerTitle {
+    margin-bottom: 10px;
+    font-family: 'MontserratSemiBold', sans-serif;
+    font-size: 18px;
+    text-align: center;
+    color: var(--color-primary-text);
+}
+
+.footerNavList {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+
+}
+
+.footerNavLink {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+    // width: 105px;
+    padding-right: 25px;
+    color: var(--color-titles-section);
+    font-size: 14px;
+    text-align: center;
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover, &:focus {
+            color: transparent;
+            background-clip: text;
+            background-image: var(--hover-gradient);
+    }
+
+    &::after{
+        content: "";
+        position: absolute;
+        top: 0px;
+        right: 5px;
+        width: 15px;
+        height: 15px;
+        background-size: cover;
+        transition: background-image 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    }
+
+    &Home{
+        &::after{
+            background-image: url("/home-icon.svg");
+        }
+    }
+    &Home:hover::after{
+        background-image: url("/home-icon-hover.svg");
+    }
+
+
+    &Continents {
+        &::after {
+            // top: 1px;
+            // right: -10px;
+            background-image: url("/continents-icon.svg");
+        }
+   }
+    
+    &Continents:hover::after {
+            background-image: url("/continents-icon-hover.svg");
+    }
+
+    &Countries {
+        &::after {
+            // right: 12px;
+            background-image: url("/countries-icon.svg");
+        }
+    }
+    
+    &Countries:hover::after {
+        background-image: url("/countries-icon-hover.svg");
+    }
+
+    &Recipes {
+        &::after {
+            // top: 1px;
+            background-image: url("/recipes-icon.svg");
+        }
+    }
+    
+    &Recipes:hover::after {
+        background-image: url("/recipes-icon-hover.svg");
+    }
+
+    &Products {
+             &::after {
+                //  right: -2px;
+                 background-image: url("/products-icon.svg");
+             }
+         }
+    
+    &Products:hover::after {
+             background-image: url("/products-icon-hover.svg");
+         }
+
+    &Manual {
+            &::after {
+                // top: 1px;
+                // right: -1px;
+                background-image: url("/manual-icon.svg");
+            }
+    }
+            
+    &Manual:hover::after {
+        background-image: url("/manual-icon-hover.svg");
+    }
+
+    &Contacts {
+            &::after {
+                // right: 2px;
+                background-image: url("/contacts-icon.svg");
+            }
+    }
+    
+    &Contacts:hover::after {
+            background-image: url("/contacts-icon-hover.svg");
+    }
+
+    &Author {
+        &::after {
+            // top: 1px;
+            // right: -5px;
+            background-image: url("/author-icon.svg");
+        }
+    }
+    
+    &Author:hover::after {
+        background-image: url("/author-icon-hover.svg");
+    }
+
+    &Resource {
+        &::after {
+            // top: 1px;
+            // right: -8px;
+            background-image: url("/resource-icon.svg");
+        }
+    }
+    
+    &Resource:hover::after {
+        background-image: url("/resource-icon-hover.svg");
+    }
+}
+
+
+.footerContactsList {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.footerContactsLink {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-titles-section);
+    transition: background-image 250ms cubic-bezier(0.4, 0, 0.2, 1), color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    margin-left: 18px;
+
+    &:hover, &:focus {
+        color: transparent;
+        background-clip: text;
+        background-image: var(--hover-gradient);
+    }
+
+    &::after{
+        content: "";
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 25px;
+        height: 25px;
+        background-size: cover;
+        transition: background-image 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    }
+
+    &Insta::after{
+        top: -11px;
+        background-image: url("/insta-icon.svg");
+    }
+    &Insta:hover::after {
+        background-image: url("/insta-icon-hover.svg");
+    }
+
+    &Fb::after {
+        top: -12px;
+        background-image: url("/fb-icon.svg");
+    }
+    
+    &Fb:hover::after {
+        background-image: url("/fb-icon-hover.svg");
+    }
+
+    &Mail{
+        margin-left: 48px;
+    }
+
+    &Mail::after {
+        top: -1px;
+        left: -30px;
+        background-image: url("/mail-icon.svg");
+    }
+    
+    &Mail:hover::after {
+        background-image: url("/mail-icon-hover.svg");
+    }
+
+}
+
+
+.footerContsctsStyleBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+
+}
+
+@media screen and (min-width:768px) {
+    .footerContainer {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        gap: 25px;
+    }
+
+    .footerLogo {
+        width: 250px;
+        font-size: 26px;
+        &::after{
+            right: 85px;
+        }
+    
+    }
+
+    .footerNavContainer,
+    .footerContactsContainer {
+        width: 350px;
+    }
+
+}
+
+
+@media screen and (min-width:1200px) {
+    .footerContainer {
+        gap: 15px;
+        justify-content: center;
+    }
+
+    .footerTitle {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    .footerLogo {
+        width: 310px;
+        height: 70px;
+        font-size: 32px;
+
+        &DecorWord {
+                margin-left: 82px;
+        }
+        
+        &::after{
+            width: 76px;
+            height: 54px;
+            bottom: 6px;
+            right: 108px;
+        }
+    }
+
+    .footerNavContainer,
+    .footerContactsContainer {
+        width: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .footerContactsStyleBox {
+        flex-direction: row-reverse;
+        align-items: center;
+        gap: 15px;
+
+    }
+
+    .footerNavList {
+        width: 350px;
+    }
+
+    .footerContactsLink{
+        &Mail::after {
+            top: 1px;
+        }
+    }
+}
+
+@media screen and (min-width:1440px) {
+    .footerContainer {
+        gap: 15px;
+    }
+
+    .headerLogo {
+        width: 360px;
+        font-size: 36px;
+    
+        &Icon {
+            width: 135px;
+            height: 85px;
+            }
+    }
+
+    .footerNavContainer,
+    .footerContactsContainer {
+        width: 500px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .footerNavList {
+        width: 350px;
+
+    }
+
+        .footerContactsLink {
+            &Mail::after {
+                top: 2px;
+            }
+        }
+
+}

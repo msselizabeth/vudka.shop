@@ -1,0 +1,25 @@
+{
+     "Header":{
+       "home": "Home",
+       "continents": "Continents",
+       "countries": "Countries",
+       "recipes": "Recipes",
+       "products": "Products",
+       "manual": "Manual",
+       "contacts": "Contacts",
+       "author": "About author",
+       "resource": "About resource",
+       "auth": "Log in",
+       "registrate": "Registration"
+    },
+  "Home": {
+    "title": "World cuisine Traditions and Benefits",
+    "greenland": "Greenland",
+    "na": "North America",
+    "sa": "South America",
+    "asia": "Asia",
+    "eu": "Europe",
+    "africa": "Africa",
+    "au": "Australia"
+  }
+}
