@@ -1,0 +1,18 @@
+.carp__menu__list{
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 13px;
+    column-gap: 10px;
+    padding: 10px 10px 20px 15px;
+    font-size: 16px;
+}
+.carp__menu__item{
+    width: 170px;  
+}
+.carp__menu__link{
+    padding: 7px;
+}
+.current{
+    border-radius: 25px;
+    border: 1px solid var(--primary-text-color);
+}

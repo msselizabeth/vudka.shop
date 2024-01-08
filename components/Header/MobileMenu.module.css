@@ -1,0 +1,125 @@
+.mob__menu__btn {
+    width: 45px;
+    height: 45px;
+    color: var(--icons-color);
+    transition: var(--transition);
+}
+
+.mob__menu__btn:hover,
+.mob__menu__btn:focus {
+    color: var(--icons-color-hover);
+}
+
+.mob__menu__icon {
+    width: 45px;
+    height: 45px;
+    fill: currentColor;
+}
+.mob__menu__close__btn{
+    width: 35px;
+        height: 35px;
+        margin-left: 250px;
+        color: var(--icons-color);
+        transition: var(--transition);
+}
+.mob__menu__close__btn:hover,
+.mob__menu__close__btn:focus {
+    color: var(--icons-color-hover);
+}
+.mob__menu__close__icon {
+    width: 35px;
+    height: 35px;
+    fill: currentColor;
+}
+
+.mob__menu__overlay{
+    position: fixed;
+        top: 0;
+        right: -100%;
+        z-index: 100;
+        overflow-y: scroll;
+        width: 320px;
+        height: 100%;
+        background-color: #ffffff;
+        transition: right 0.5s ease;
+}
+.mob__menu__overlay.open{
+    right: 0;
+}
+
+.mob__menu__cont{
+      background: var(--header-gradient);
+       width: 320px;
+        height: 100%;
+       color: var(--primary-links-color);
+        padding: 20px;
+        z-index: 1000;
+ 
+}
+.mob__list{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 20px;
+}
+.mob__link{
+   transition: var(--transition);
+}
+.mob__link:hover{
+  color: var(--icons-color-hover);
+}
+.mob__inner__list{
+    height: 0;
+    overflow: hidden;
+    transition: height 0.5s ease;
+}
+.mob__inner__list.active{
+    height: auto;
+    display: flex;
+        align-items: center;
+        width: 310px;
+        margin-top: 10px;
+        margin-left: 10px;
+        flex-wrap: wrap;
+        row-gap: 10px;
+        column-gap: 20px;
+        font-size: 15px;
+        font-weight: 300;
+        transition: height 0.5s ease;
+
+}
+
+.mob__inner__item{
+    width: 145px;
+}
+.mob__item__cont{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.mob__inner__btn{
+    width:35px;
+    height: 35px;
+    color: var(--icons-color);
+    transition: var(--transition);
+}
+.mob__inner__btn:hover, .mob__inner__btn:focus {
+   color: var(--icons-color-hover);
+}
+.mob__inner__icon{
+    width: 35px;
+    height: 35px;
+    fill: currentColor;
+}
+
+@media screen and (min-width:425px){
+    .mob__menu__btn {
+            width: 50px;
+            height: 50px;
+        }
+    
+    .mob__menu__icon {
+            width: 50px;
+            height: 50px;
+    }
+}
