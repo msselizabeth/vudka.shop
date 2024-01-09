@@ -8,7 +8,7 @@ export async function GET(request, { params }) {
   try {
     const id = params.id;
 
-    const db = await connectDB;
+    const db = await connectDB();
 
     const spinReel = await SpinReelModel.findById(id);
     const carpReel = await CarpReelModel.findById(id);
