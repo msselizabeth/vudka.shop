@@ -4,7 +4,7 @@ import Link from "next/link";
 async function getData() {
   try {
     const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/reels/predator`
+    `${process.env.NEXT_PUBLIC_API_URL}/reels/predator`
   );
   // The return value is *not* serialized
 

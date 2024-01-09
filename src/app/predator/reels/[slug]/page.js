@@ -3,7 +3,7 @@ import { ReelProduct } from "../../../../../components/Reels/ReelProduct";
 async function getData(slug) {
   try {
     const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/reel/${slug}`
+    `${process.env.NEXT_PUBLIC_API_URL}/reel/${slug}`
   );
   // The return value is *not* serialized
 
