@@ -1,19 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
 
-// async function getData() {
-//   const res = await fetch(
-//     `${process.env.NEXT_PUBLIC_API_URL}/api/reels/predator`
-//   );
-//   // The return value is *not* serialized
+async function getData() {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/reels/predator`
+  );
+  // The return value is *not* serialized
 
-//   if (!res.ok) {
-//     // This will activate the closest `error.js` Error Boundary
-//     throw new Error("Failed to fetch data");
-//   }
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
 
-//   return res.json();
-// }
+  return res.json();
+}
 
 export default async function PredatorReels() {
 
@@ -21,7 +21,7 @@ export default async function PredatorReels() {
 
 
   return <div className="container">
-    {/* <ul>
+    <ul>
       {data.map(reel => {
         return (
           <li key={reel._id}>
@@ -31,6 +31,6 @@ export default async function PredatorReels() {
           </li>
         );
       })}
-    </ul> */}
+    </ul>
   </div>;
 }
