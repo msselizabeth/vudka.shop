@@ -107,7 +107,7 @@ export const MobileMenu = () => {
                 >
                   {carpMenu.map(({ id, path, name }) => {
                     return (
-                      <li ket={id} className={styles.mob__inner__item}>
+                      <li key={id} className={styles.mob__inner__item}>
                         <Link
                           href={path}
                           className={styles.mob__link}
@@ -144,7 +144,7 @@ export const MobileMenu = () => {
                 >
                   {feederMenu.map(({ id, path, name }) => {
                     return (
-                      <li ket={id} className={styles.mob__inner__item}>
+                      <li key={id} className={styles.mob__inner__item}>
                         <Link
                           href={path}
                           className={styles.mob__link}
@@ -186,7 +186,7 @@ export const MobileMenu = () => {
                 >
                   {predatorMenu.map(({ id, path, name }) => {
                     return (
-                      <li ket={id} className={styles.mob__inner__item}>
+                      <li key={id} className={styles.mob__inner__item}>
                         <Link
                           href={path}
                           className={styles.mob__link}

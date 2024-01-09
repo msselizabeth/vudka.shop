@@ -20,20 +20,20 @@ export const ReelModelSelector = ({ models }) => {
               className={styles.reel__selector__btn}
               style={{
                 background:
-                  selectedModel.modSize === model.modSize
+                  selectedModel.modNumber === model.modNumber
                     ? "#F6F3BD"
                     : "#136773",
                 color:
-                  selectedModel.modSize === model.modSize
+                  selectedModel.modNumber === model.modNumber
                     ? "#F79400"
                     : "#F6F3BD",
                 border:
-                  selectedModel.modSize === model.modSize
+                  selectedModel.modNumber === model.modNumber
                     ? "1px solid #F79400"
                     : "2px solid #136773",
               }}
             >
-              {model.modSize}
+              {model.modNumber}
             </button>
           </li>
         ))}
@@ -41,7 +41,7 @@ export const ReelModelSelector = ({ models }) => {
 
       <div className={styles.select__info__container}>
         <h3 className={styles.select__info__title}>
-          Обрана модель: {selectedModel.modSize}
+          Обрана модель: {selectedModel.modNumber}
         </h3>
 
         <div className={styles.price__block}>
@@ -49,7 +49,7 @@ export const ReelModelSelector = ({ models }) => {
             <div className={styles.price__container}>
               <h3 className={styles.select__price__title}>Ціна: </h3>
               <p className={styles.select__price__value}>
-                {selectedModel.price * process.env.exchange} грн
+                {selectedModel.price * process.env.NEXT_PUBLIC_EXCHANGE} грн
               </p>
             </div>
             {selectedModel.stock ? (
@@ -66,6 +66,10 @@ export const ReelModelSelector = ({ models }) => {
           <li className={styles.select__info__item}>
             <h4>Артикул:</h4>
             <p>{selectedModel.item}</p>
+          </li>
+          <li className={styles.select__info__item}>
+            <h4>Вага:</h4>
+            <p>{selectedModel.weight}</p>
           </li>
           <li className={styles.select__info__item}>
             <h4>Тягове зусилля:</h4>

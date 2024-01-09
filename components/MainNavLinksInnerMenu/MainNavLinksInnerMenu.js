@@ -16,7 +16,7 @@ export const MainNavLinksInnerMenu = ({ title, menu }) => {
                           <Link
                             href={path}
                             className={`${styles.link} ${
-                              pathname === path ? styles.current : ""
+                              pathname.includes(path) ? styles.current : ""
                             }`}
                           >
                             {name}

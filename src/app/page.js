@@ -1,11 +1,10 @@
 import Link from "next/link";
 import styles from "./page.module.css";
 import Image from "next/image";
-import { test } from "../../data/test";
-import { ReelProduct } from "../../components/Reels/ReelProduct";
+
 
 export default function Home() {
-  console.log(test.img);
+
 
   return (
     <>
@@ -21,7 +20,7 @@ export default function Home() {
         </div>
       </section>
 
-      <ReelProduct />
+  
     </>
   );
 }

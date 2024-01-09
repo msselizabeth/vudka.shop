@@ -1,9 +1,9 @@
-import { test } from "../../data/test";
+
 import { Carousel } from "../Carousel/Carousel";
 import { ReelModelSelector } from "./ReelModelSelector";
 import styles from "./ReelProduct.module.css";
 
-export const ReelProduct = () => {
+export const ReelProduct = ({test}) => {
   return (
     <section className="section">
       <div className="container">
