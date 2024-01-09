@@ -49,7 +49,7 @@ export const ReelModelSelector = ({ models }) => {
             <div className={styles.price__container}>
               <h3 className={styles.select__price__title}>Ціна: </h3>
               <p className={styles.select__price__value}>
-                {selectedModel.price * 38} грн
+                {selectedModel.price * process.env.exchange} грн
               </p>
             </div>
             {selectedModel.stock ? (
