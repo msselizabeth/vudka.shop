@@ -1,7 +1,8 @@
 import { ReelProduct } from "../../../../../components/Reels/ReelProduct";
 
 async function getData(slug) {
-  const res = await fetch(
+  try {
+    const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/reel/${slug}`
   );
   // The return value is *not* serialized
@@ -12,6 +13,10 @@ async function getData(slug) {
   }
 
   return res.json();
+  }
+  catch(error) {
+    throw new Error(error)
+  }
 }
 
 export default async function PredatorReel({params}) {

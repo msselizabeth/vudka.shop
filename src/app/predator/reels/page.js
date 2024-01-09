@@ -2,7 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 async function getData() {
-  const res = await fetch(
+  try {
+    const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/reels/predator`
   );
   // The return value is *not* serialized
@@ -13,6 +14,10 @@ async function getData() {
   }
 
   return res.json();
+  }
+  catch (error) {
+    throw new Error(error);
+  }
 }
 
 export default async function PredatorReels() {
