@@ -1,30 +1,27 @@
-
-
 import { NextResponse } from "next/server";
 import connectDB from "../../../../../utils/database";
 import SpinReelModel from "../../../../../models/ReelSpin";
 import CarpReelModel from "../../../../../models/CarpReel";
 
-export async function GET(request, {params}) {
+export async function GET(request, { params }) {
   try {
-      const slug = params.slug;
-  
-    const db = await connectDB;
+    const slug = params.slug;
 
-      const spinReel = await SpinReelModel.findById(slug);
-      const carpReel = await CarpReelModel.findById(slug);
+    const db = await connectDB();
 
-      if (spinReel) {
-           return NextResponse.json(spinReel, { status: 200 });
-      }
-       if (carpReel) {
-         return NextResponse.json(carpReel, { status: 200 });
-    }
+    const spinReels = await SpinReelModel.find({
+      purpose: { $elemMatch: { $eq: slug } },
+    });
+    const carpReels = await CarpReelModel.find({
+      purpose: { $elemMatch: { $eq: slug } },
+    });
 
-    return NextResponse.json("Not found", { status: 404 });
-    
+    const result = [...spinReels, ...carpReels];
+
+    return NextResponse.json(result, { status: 200 });
   } catch (err) {
     console.error("Error:", err);
     return new NextResponse("Error in response", { status: 500 });
   }
 }
+
