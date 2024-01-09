@@ -22,7 +22,7 @@ async function getData() {
 
 export default async function PredatorReels() {
 
-  // const data = await getData();
+  const data = await getData();
 
 
   return <div className="container">
