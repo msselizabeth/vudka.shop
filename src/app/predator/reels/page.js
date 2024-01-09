@@ -1,5 +1,5 @@
-// import Image from "next/image";
-// import Link from "next/link";
+import Image from "next/image";
+import Link from "next/link";
 
 // async function getData() {
 //   const res = await fetch(
@@ -15,22 +15,22 @@
 //   return res.json();
 // }
 
-// export default async function PredatorReels() {
+export default async function PredatorReels() {
 
-//   const data = await getData();
+  // const data = await getData();
 
 
-//   return <div className="container">
-//     <ul>
-//       {data.map(reel => {
-//         return (
-//           <li key={reel._id}>
-//             <Image src={reel.img[0]} alt={reel.alt} width={200} height={200} />
-//             <Link href={`/predator/reels/${reel._id}`}>{`Котушка ${reel.brand} ${reel.series} `}
-//             </Link>
-//           </li>
-//         );
-//       })}
-//     </ul>
-//   </div>;
-// }
+  return <div className="container">
+    {/* <ul>
+      {data.map(reel => {
+        return (
+          <li key={reel._id}>
+            <Image src={reel.img[0]} alt={reel.alt} width={200} height={200} />
+            <Link href={`/predator/reels/${reel._id}`}>{`Котушка ${reel.brand} ${reel.series} `}
+            </Link>
+          </li>
+        );
+      })}
+    </ul> */}
+  </div>;
+}

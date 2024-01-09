@@ -14,10 +14,11 @@ import { ReelProduct } from "../../../../../components/Reels/ReelProduct";
 //   return res.json();
 // }
 
-// export default async function PredatorReel({params}) {
+export default async function PredatorReel({params}) {
 
-//     const data = await getData(params.slug);
+    // const data = await getData(params.slug);
 
 
-//     return <ReelProduct test={data} />;
-// }
+  // return <ReelProduct test={data} />;
+  return <></>
+}
