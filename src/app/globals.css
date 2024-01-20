@@ -6,7 +6,7 @@
   --icons-color-hover: #F79400;
   --buttons-back-color: #136773;
   --box-shadow-color: rgba(11, 128, 144, 0.45);
-  --transition: color 0.5s ease, backround 0.5s ease;
+  --transition: color 0.5s ease, backround-color 0.5s ease, left 0.5s ease, right 0.5s ease, border 0.5s ease, box-shadow 0.5s ease;
   --back-section: rgba(254, 253, 232, 0.70);
   --header-gradient: linear-gradient(to bottom, rgba(10, 103, 115, 1), rgba(11, 128, 144, 0.8));
   --not-found-link-back: #03464F;
@@ -18,7 +18,6 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-
     --body-color: #000000;
     --box-shadow-color: rgba(246, 243, 189, 0.75);
     --back-section: rgba(254, 253, 232, 0.90);
@@ -62,6 +61,7 @@ ul{
 button{
   background-color: transparent;
   border: 0;
+  font-family: var(--font-roboto);
 }
 img{
   display: block;
@@ -90,27 +90,26 @@ img{
 }
 .container{
   width: 100%;
-  padding: 0px 10px 0px 10px;
+  padding: 0px 5px 0px 5px;
   
 }
 .hero-section{
-  width: calc(100% - 20px);
+  width: calc(100% - 14px);
   margin: 20px auto;
   border-radius: 30px;
   box-shadow: 0px 0px 10px 2px var(--box-shadow-color);
 }
 .section{
-  width: calc(100% - 20px);
+  width: calc(100% - 14px);
   margin: 20px auto;
-  padding: 20px 0px;
+  padding: 10px 0px 10px 0px;
   border-radius: 30px;
   background: var(--back-section);
   box-shadow: 0px 0px 10px 2px var(--box-shadow-color);
 }
 .title{
-  padding-left: 10px;
-  padding-top: 15px;
-  font-size: 18px;
+  margin-left: 7px;
+  font-size: 17px;
   color: var(--titles-color);
 }
 
@@ -123,13 +122,13 @@ img{
 @media screen and (min-width:768px) {
   body {
       background-size: 250px 250px;
-      font-size: 17px;
+      font-size: 16px;
   }
   .title{
-    font-size: 20px;
+    font-size: 18px;
   }
   .container {
-    padding: 0px 20px 0px 20px;
+    padding: 0px 10px 0px 10px;
   }
   .hero-section{
     width: 728px;
@@ -140,7 +139,7 @@ img{
   .section{
       width: 728px;
       margin: 20px auto;
-      padding: 20px 0px;
+      padding: 15px 0px;
       border-radius: 40px;
       box-shadow: 0px 0px 15px 3px var(--box-shadow-color);
   }
@@ -155,13 +154,13 @@ img{
 @media screen and (min-width:1024px) {
   body {
       background-size: 300px 300px;
-      font-size: 20px;
+      font-size: 18px;
     }
         .title {
-          font-size: 22px;
+          font-size: 20px;
         }
   .container {
-    padding: 0px 25px 0px 25px;
+    padding: 0px 15px 0px 15px;
   }
 
   .hero-section {
@@ -174,7 +173,7 @@ img{
   .section {
     width: 974px;
     margin: 30px auto;
-    padding: 30px 0px;
+    padding: 15px 0px;
     border-radius: 40px;
     box-shadow: 0px 0px 16px 4px var(--box-shadow-color);
   }
@@ -194,26 +193,27 @@ img{
 @media screen and (min-width:1440px) {
   body {
       background-size: 450px 450px;
-      font-size: 22px;
+      font-size: 20px;
     }
         .title {
-          font-size: 24px;
+          font-size: 22px;
         }
+
   .container {
-    padding: 0px 30px 0px 30px;
+    padding: 0px 15px 0px 15px;
   }
 
   .hero-section {
-    width: 1380px;
+    width: 1420px;
     margin: 40px auto;
     border-radius: 50px;
     box-shadow: 0px 0px 20px 6px var(--box-shadow-color);
   }
 
   .section {
-    width: 1380px;
+    width: 1420px;
     margin: 50px auto;
-    padding: 30px 0px;
+    padding: 20px 0px;
     border-radius: 50px;
     box-shadow: 0px 0px 20px 6px var(--box-shadow-color);
   }

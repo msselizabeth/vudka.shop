@@ -5,18 +5,25 @@ import styles from "./MobileMenu.module.css"
 import { MobMenuCloseIcon } from "../icons/MobMenuCloseIcon";
 import { MobInnerMenuIcon } from "../icons/MobInnerMenuIcon";
 import Link from "next/link";
-import { carpMenu } from "../../data/carp";
-import { feederMenu } from "../../data/feeder";
-import { predatorMenu } from "../../data/predator";
+
+import { rybalskiSnastiMenu } from "../../data/rybalski-snasti";
+import { osnashchennyaMenu } from "../../data/osnashchennya";
+import { prymankyPrykormkyMenu } from "../../data/prymanky-ta-prykormky";
+import { HomeIcon } from "../icons/HomeIcon";
+import { MailIcon } from "../icons/MailIcon";
+import { PhoneIcon } from "../icons/PhoneIcon";
+import { FacebookIcon } from "../icons/FacebookIcon";
+import { InstaIcon } from "../icons/InstaIcon";
+
 
 export const MobileMenu = () => {
     const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
   
   const [innerMenuStates, setInnerMenuStates] = useState({
-    carp: false,
-    feeder: false,
-    predator: false,
+    rybalskiSnasti: false,
+    osnashchennya: false,
+    prymankyPrykormky: false,
   });
 
   const toggleInnerMenu = (menu) => {
@@ -73,39 +80,37 @@ export const MobileMenu = () => {
             >
               <MobMenuCloseIcon />
             </button>
+            <Link
+              href="/"
+              className={styles.mob__home__link}
+              onClick={toggleMenu}
+            >
+              <HomeIcon />
+            </Link>
             <ul className={styles.mob__list}>
               <li>
-                <Link
-                  href="/"
-                  className={styles.mob__link}
-                  onClick={toggleMenu}
-                >
-                  Головна
-                </Link>
-              </li>
-              <li>
                 <div className={styles.mob__item__cont}>
                   <Link
-                    href="/carp"
+                    href="/rybalski-snasti"
                     className={styles.mob__link}
                     onClick={toggleMenu}
                   >
-                    Короп
+                    Снасті
                   </Link>
                   <button
                     className={styles.mob__inner__btn}
                     type="button"
-                    onClick={() => toggleInnerMenu("carp")}
+                    onClick={() => toggleInnerMenu("rybalskiSnasti")}
                   >
                     <MobInnerMenuIcon />
                   </button>
                 </div>
                 <ul
                   className={`${styles.mob__inner__list} ${
-                    innerMenuStates.carp ? styles.active : ""
+                    innerMenuStates.rybalskiSnasti ? styles.active : ""
                   }`}
                 >
-                  {carpMenu.map(({ id, path, name }) => {
+                  {rybalskiSnastiMenu.map(({ id, path, name }) => {
                     return (
                       <li key={id} className={styles.mob__inner__item}>
                         <Link
@@ -123,26 +128,26 @@ export const MobileMenu = () => {
               <li>
                 <div className={styles.mob__item__cont}>
                   <Link
-                    href="/feeder"
+                    href="/osnashchennya"
                     className={styles.mob__link}
                     onClick={toggleMenu}
                   >
-                    Фідер
+                    Оснащення
                   </Link>
                   <button
                     className={styles.mob__inner__btn}
                     type="button"
-                    onClick={() => toggleInnerMenu("feeder")}
+                    onClick={() => toggleInnerMenu("osnashchennya")}
                   >
                     <MobInnerMenuIcon />
                   </button>
                 </div>
                 <ul
                   className={`${styles.mob__inner__list} ${
-                    innerMenuStates.feeder ? styles.active : ""
+                    innerMenuStates.osnashchennya ? styles.active : ""
                   }`}
                 >
-                  {feederMenu.map(({ id, path, name }) => {
+                  {osnashchennyaMenu.map(({ id, path, name }) => {
                     return (
                       <li key={id} className={styles.mob__inner__item}>
                         <Link
@@ -157,34 +162,29 @@ export const MobileMenu = () => {
                   })}
                 </ul>
               </li>
-
-              <li>Поплавець</li>
-
-
-
               <li>
                 <div className={styles.mob__item__cont}>
                   <Link
-                    href="/predator"
+                    href="/prymanky-ta-prykormky"
                     className={styles.mob__link}
                     onClick={toggleMenu}
                   >
-                    Хижак
+                    Приманки та прикормки
                   </Link>
                   <button
                     className={styles.mob__inner__btn}
                     type="button"
-                    onClick={() => toggleInnerMenu("predator")}
+                    onClick={() => toggleInnerMenu("prymankyPrykormky")}
                   >
                     <MobInnerMenuIcon />
                   </button>
                 </div>
                 <ul
                   className={`${styles.mob__inner__list} ${
-                    innerMenuStates.predator ? styles.active : ""
+                    innerMenuStates.prymankyPrykormky ? styles.active : ""
                   }`}
                 >
-                  {predatorMenu.map(({ id, path, name }) => {
+                  {prymankyPrykormkyMenu.map(({ id, path, name }) => {
                     return (
                       <li key={id} className={styles.mob__inner__item}>
                         <Link
@@ -199,12 +199,48 @@ export const MobileMenu = () => {
                   })}
                 </ul>
               </li>
-              <li>З човна</li>
-              <li>Море</li>
-              <li>Норвегія</li>
-              <li>Кемпінг</li>
-              <li>Одяг</li>
             </ul>
+            <div className={styles.contacts__container}>
+              <p className={styles.contacts__text}>Контакти:</p>
+              <ul className={styles.contacts__list}>
+                <li>
+                  <Link
+                    href={"tel:+380505545869"}
+                    className={styles.contacts__link}
+                  >
+                    <PhoneIcon /> +38(050)554-58-69
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={"mailto:michaelsheremet@gmail.com"}
+                    className={styles.contacts__link}
+                  >
+                    <MailIcon /> michaelsheremet@gmail.com
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            <div className={styles.social__container}>
+              <p className={styles.social__text}>Соціальні мережі:</p>
+              <ul className={styles.social__list}>
+                <li>
+                  <Link
+                    href={
+                      "https://www.instagram.com/supmarket_rybalka?igsh=ZDE1MWVjZGVmZQ=="
+                    }
+                    className={styles.social__link}
+                  ><InstaIcon /></Link>
+                </li>
+                <li>
+                  <Link
+                    href={"https://www.facebook.com/supmarketrybalka"}
+                    className={styles.social__link}
+                  ><FacebookIcon /></Link>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </>

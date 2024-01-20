@@ -1,16 +1,17 @@
-
 import { Carousel } from "../Carousel/Carousel";
-import { ReelModelSelector } from "./ReelModelSelector";
+import { ReelModelSelector } from "../Silicones/SiliconeModelSelector";
 import styles from "./ReelProduct.module.css";
 
-export const ReelProduct = ({test}) => {
+export const ReelProduct = ({ test }) => {
   return (
     <section className="section">
       <div className="container">
         <div className={styles.prod__container}>
-            <Carousel images={test.img} alt={"alt image"} />
+          <Carousel images={test.img} alt={"alt image"} />
           <div className={styles.info__container}>
-            <h1 className={styles.prod__title}>{`Котушка ${test.brand} ${test.series}`}</h1>
+            <h1
+              className={styles.prod__title}
+            >{`Котушка ${test.brand} ${test.series}`}</h1>
             <ReelModelSelector models={test.models} />
           </div>
         </div>

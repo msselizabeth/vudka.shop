@@ -26,6 +26,7 @@
 .mob__menu__close__btn:focus {
     color: var(--icons-color-hover);
 }
+
 .mob__menu__close__icon {
     width: 35px;
     height: 35px;
@@ -56,11 +57,24 @@
         z-index: 1000;
  
 }
+.mob__home__link{
+    display: block;
+    width: 35px;
+    height: 35px;
+    color: var(--icons-color);
+    transition: var(--transition);
+}
+
+.mob__home__link:hover , .mob__home__link:focus{
+    color: var(--icons-color-hover);
+}
+
 .mob__list{
     display: flex;
     flex-direction: column;
     gap: 12px;
     font-size: 20px;
+    margin-top: 10px;
 }
 .mob__link{
    transition: var(--transition);
@@ -76,26 +90,23 @@
 .mob__inner__list.active{
     height: auto;
     display: flex;
-        align-items: center;
-        width: 310px;
-        margin-top: 10px;
-        margin-left: 10px;
-        flex-wrap: wrap;
-        row-gap: 10px;
-        column-gap: 20px;
-        font-size: 15px;
+        
+       flex-direction: column;
+       gap: 10px;
+        padding-top: 5px;
+        padding-left: 15px;
+        
+
+        font-size: 16px;
         font-weight: 300;
         transition: height 0.5s ease;
 
 }
 
-.mob__inner__item{
-    width: 145px;
-}
 .mob__item__cont{
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 13px;
 }
 .mob__inner__btn{
     width:35px;
@@ -112,6 +123,57 @@
     fill: currentColor;
 }
 
+/* contacts section */
+.contacts__container{
+    margin-top: 15px;
+    font-size: 20px;
+}
+.contacts__list{
+   
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    padding: 10px;
+}
+
+.contacts__link{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 15px;
+    color: var(--icons-color);
+    transition: var(--transition);
+}
+.contacts__link:hover, .contacts__link:focus{
+    color: var(--icons-color-hover);
+}
+
+/* socials section */
+.social__container {
+    margin-top: 15px;
+    font-size: 20px;
+}
+
+.social__list {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+}
+
+.social__link {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 15px;
+    color: var(--icons-color);
+    transition: var(--transition);
+}
+
+.social__link:hover,
+.social__link:focus {
+    color: var(--icons-color-hover);
+}
+
 @media screen and (min-width:425px){
     .mob__menu__btn {
             width: 50px;
@@ -122,4 +184,75 @@
             width: 50px;
             height: 50px;
     }
+}
+
+@media screen and (min-width:768px) {
+    .mob__menu__btn {
+        width: 60px;
+        height: 60px;
+    }
+
+    .mob__menu__icon {
+        width: 60px;
+        height: 60px;
+    }
+    .mob__menu__close__btn {
+        width: 45px;
+        height: 45px;
+        margin-left: 480px;
+    }
+    .mob__menu__close__icon {
+        width: 45px;
+        height: 45px;
+    }
+
+    .mob__menu__overlay {
+            width: 560px;
+    }
+        .mob__menu__cont {
+            width: 560px;
+            padding: 25px;
+        }
+
+        .mob__list {
+            gap: 15px;
+            font-size: 22px;
+            margin-top: 20px;
+        }
+    
+
+        .mob__inner__list.active {
+            flex-direction: row;
+            flex-wrap: wrap;
+            width: 530px;
+            row-gap: 12px;
+            column-gap: 1px;
+            padding-top: 7px;
+            padding-left: 15px;
+         
+            font-size: 18px;
+
+        }
+    
+        .mob__inner__item{
+        width: 250px;
+        }
+
+        /* contacts section */
+        .contacts__container {
+            margin-top: 20px;
+            font-size: 22px;
+        }
+    
+        .contacts__link {
+            font-size: 18px;
+
+        }
+        /* contacts section */
+        .social__container {
+         margin-top: 20px;
+         font-size: 22px;
+        }             
+       
+      
 }

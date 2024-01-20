@@ -1,31 +1,33 @@
 .list {
     display: flex;
     flex-wrap: wrap;
-    column-gap: 15px;
+    column-gap: 10px;
     row-gap: 10px;
-    padding: 10px 10px 20px 15px;
+    padding: 10px 0px 0px 10px;
     font-size: 16px;
 }
-/* .item{
-    display: flex;
-    justify-content: center;
-    width: 80px;
-} */
-
 
 .link {
     padding: 7px;
+    transition: var(--transition);
 }
-
+.link:hover, .link:focus {
+    color: var(--icons-color-hover);
+}
 .current {
     border-radius: 25px;
     border: 1px solid var(--primary-text-color);
+    transition: var(--transition);
+}
+.current:hover,
+.current:focus {
+    border: 1px solid var(--icons-color-hover);
 }
 
 @media screen and (min-width:768px) {
     .list {
         font-size: 18px;
-        padding: 20px 10px 10px 20px;
+        padding: 10px 0px 0px 15px;
         row-gap: 18px;
         column-gap: 15px;
     }

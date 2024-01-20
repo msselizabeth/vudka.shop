@@ -1,0 +1,327 @@
+
+.select__btns__list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 5px;
+    max-height: 180px;
+    padding-top: 10px;
+    padding-left: 10px;
+    overflow-y: hidden;
+    transition: max-height 0.5s ease;
+}
+.select__btns__list.opened{
+    max-height: 1500px;
+}
+.silicone__selector__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+    padding: 3px;
+    cursor: pointer;
+    border-radius: 10px;
+    font-size: 14px;
+    transition: var(--transition);
+}
+.silicone__selector__btn:hover, .silicone__selector__btn:focus{
+    box-shadow: 0px 0px 6px 1px #F79400;
+}
+
+.selector__inner__img {
+    border-radius: 10px;
+}
+.toggle__btn__container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0px;
+}
+.toggle__btn{
+    padding: 8px;
+    border-radius: 25px;
+    border: 0.5px solid var(--titles-color);
+    color: var(--titles-color);
+    transition: var(--transition);
+}
+.toggle__btn:hover, .toggle__btn:focus{
+    color: var(--icons-color-hover);
+    border: 0.5px solid var(--icons-color-hover);
+}
+.selector__img {
+    margin: 0 auto;
+    border-radius: 10px;
+    border: 0.3px solid rgba(11, 128, 144, 0.45);
+}
+
+.select__info__container {
+    padding-left: 12px;
+}
+.select__info__title {
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.price__block{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.price__container{
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 10px;
+}
+.select__stock__text {
+    color: var(--icons-color-hover);
+    font-size: 17px;
+    font-weight: 700;
+}
+.select__price__title{
+    font-size: 17px;
+}
+.select__price__value{
+    font-weight: 700;
+    font-size: 17px;
+}
+
+.select__info__list{
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    padding: 10px;
+}
+.select__info__item{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+
+@media screen and (min-width:425px){
+    .select__btns__list{
+        max-height: 190px;
+    }
+    .toggle__btn {
+        padding: 10px;
+        font-size: 15px;
+        border: 0.8px solid var(--titles-color);
+        }
+        .toggle__btn:hover,
+        .toggle__btn:focus {
+            border: 0.8px solid var(--icons-color-hover);
+        }
+        .selector__img{
+            width: 350px;
+            height: 350px;
+            border: 0.8px solid rgba(11, 128, 144, 0.45);
+        }
+        .select__info__container{
+            padding-left: 17px;
+        }
+         .select__info__title {
+             margin-top: 15px;
+         }
+    .price__container {
+        gap: 10px;
+        margin-top: 12px;
+    }
+  
+
+}
+
+@media screen and (min-width:768px) {
+    .selector__container {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: center;
+            gap: 10px;
+        }
+    .select__btns__list{
+        justify-content: center;
+        gap: 10px;
+        max-height: 375px;
+
+    }
+    .selector__item{
+        width: 100px;
+    }
+    .silicone__selector__btn{
+        padding: 5px;
+        border-radius: 15px;
+        font-size: 16px;
+    }
+    .selector__inner__img{
+        width: 40px;
+        height: 40px;
+    }
+         .toggle__btn {
+             padding: 10px;
+             font-size: 16px;
+             border: 1px solid var(--titles-color);
+         }
+    
+         .toggle__btn:hover,
+         .toggle__btn:focus {
+             border: 1px solid var(--icons-color-hover);
+         }
+    .price__block{
+        justify-content: flex-start;
+        gap: 30px;
+    }
+    .price__container {
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    .select__price__title {
+        font-size: 18px;
+    }
+
+    .select__price__value {
+        font-size: 18px;
+    }
+    .select__stock__text{
+        font-size: 18px;
+    }
+
+    .select__info__title {
+        margin-top: 18px;
+        font-size: 17px;
+    }
+    .select__info__list{
+        padding: 10px 10px 10px 15px;
+    }
+   
+}
+
+@media screen and (min-width:1024px) {
+    .selector__container{
+        gap: 30px;
+    }
+    .select__btns__list {
+        gap: 10px;
+        max-height: 380px;
+    }
+    .selector__item {
+             width: 103px;
+         }
+    .silicone__selector__btn {
+        border-radius: 20px;
+    }
+        .silicone__selector__btn:hover,
+        .silicone__selector__btn:focus {
+            box-shadow: 0px 0px 10px 2px #F79400;
+        }
+    .selector__img{
+        width: 420px;
+        height: 420px;
+    }
+        .toggle__btn {
+            border: 1.5px solid var(--titles-color);
+            font-size: 17px;
+        }
+                 .toggle__btn:hover,
+                 .toggle__btn:focus {
+                     border: 1.5px solid var(--icons-color-hover);
+                 }
+    
+    .price__block {
+        gap: 30px;
+    }
+
+    .price__container {
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    .select__price__title {
+        font-size: 20px;
+    }
+
+    .select__price__value {
+        font-size: 20px;
+    }
+    .select__stock__text {
+        font-size: 20px;
+    }
+
+
+    .select__info__title {
+        margin-top: 18px;
+        font-size: 19px;
+    }
+
+    .select__info__list {
+        gap: 10px;
+        padding: 10px 10px 10px 20px;
+    }
+
+   
+}
+
+@media screen and (min-width:1440px) {
+    .selector__container{
+        gap: 40px;
+    }
+    .selector__img{
+        width: 500px;
+        height: 500px;
+    }
+    .select__btns__list {
+        justify-content: start;
+        align-items: start;
+        max-height: 470px;
+        width: 800px;
+        flex-wrap: wrap;
+        column-gap: 10px;
+        row-gap: 10px;
+       
+    }
+    .selector__item{
+        width: 120px;
+    }
+    .silicone__selector__btn {
+
+        padding: 7px;
+        border-radius: 25px;
+        font-size: 16px;
+    }
+         .toggle__btn {
+             font-size: 19px;
+         }
+
+    .price__block {
+        gap: 100px;
+    }
+
+    .price__container {
+        gap: 12px;
+        margin-top: 25px;
+    }
+
+    .select__price__title {
+        font-size: 22px;
+    }
+
+    .select__price__value {
+        font-size: 22px;
+    }
+
+    .select__stock__text {
+        font-size: 22px;
+    }
+
+    .select__info__title {
+        margin-top: 30px;
+        font-size: 21px;
+    }
+
+    .select__info__list {
+        gap: 15px;
+        padding: 10px 10px 10px 40px;
+    }
+
+  
+}
