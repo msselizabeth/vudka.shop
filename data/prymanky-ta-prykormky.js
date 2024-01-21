@@ -1,19 +1,19 @@
 export const prymankyPrykormkyMenu = [
-  // {
-  //   id: 1,
-  //   path: "/prymanky-ta-prykormky/bleshni",
-  //   name: "Блешні",
-  // },
+  {
+    id: 1,
+    path: "/prymanky-ta-prykormky/bleshni",
+    name: "Блешні",
+  },
   // {
   //   id: 2,
   //   path: "/prymanky-ta-prykormky/balansyry",
   //   name: "Балансири",
   // },
-  // {
-  //   id: 3,
-  //   path: "/prymanky-ta-prykormky/voblery",
-  //   name: "Воблери",
-  // },
+  {
+    id: 3,
+    path: "/prymanky-ta-prykormky/voblery",
+    name: "Воблери",
+  },
   {
     id: 4,
     path: "/prymanky-ta-prykormky/sylikon",
