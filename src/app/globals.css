@@ -5,6 +5,7 @@
   --icons-color: #F6F3BD;
   --icons-color-hover: #F79400;
   --buttons-back-color: #136773;
+  --box-shadow-color-hover: #F79400;
   --box-shadow-color: rgba(11, 128, 144, 0.45);
   --transition: color 0.5s ease, backround-color 0.5s ease, left 0.5s ease, right 0.5s ease, border 0.5s ease, box-shadow 0.5s ease;
   --back-section: rgba(254, 253, 232, 0.70);
@@ -12,6 +13,7 @@
   --not-found-link-back: #03464F;
   --not-found-link-color: #F6F3BD;
   --not-found-text-color: #03464F;
+
 
 
 }

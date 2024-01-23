@@ -1,7 +1,8 @@
-.rod__title{
+.reel__title {
     margin-bottom: 10px;
 }
-.priceBtn__container{
+
+.priceBtn__container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -10,44 +11,50 @@
     padding-right: 2px;
 }
 
-.price__container{
+.price__container {
     display: flex;
     align-items: center;
     gap: 5px;
     font-size: 18px;
     font-weight: 700;
 }
-.price__title{
+
+.price__title {
     font-size: 18px;
 }
-.stock__text{
+
+.stock__text {
     color: var(--icons-color-hover);
-        font-size: 18px;
-        font-weight: 700;
+    font-size: 18px;
+    font-weight: 700;
 }
 
-.description__container{
+.description__container {
     margin-top: 10px;
 }
-.description__list{
+
+.description__list {
     display: flex;
-        flex-direction: column;
-        gap: 10px;
-        padding-top: 12px;
-        padding-left: 15px;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 12px;
+    padding-left: 15px;
 }
-.info__container{
+
+.info__container {
     margin-top: 10px;
 }
+
 /* table styles */
 .info__table {
     width: 100%;
     border-collapse: collapse;
-     margin-top: 10px;
+    margin-top: 10px;
     font-size: 14px;
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(11, 128, 144, 0.35);
 }
+
 .th,
 .td {
     padding: 6px;
@@ -60,27 +67,31 @@
     border-right: 0.7px solid #13667368;
 }
 
-.last{
+.last {
     border-bottom: 0;
 }
 
 @media screen and (min-width:375px) {
-    .info__table{
+    .info__table {
         font-size: 15px;
     }
 }
 
 @media screen and (min-width:768px) {
-    .rod__title {
+    .reel__title {
         margin-bottom: 15px;
     }
-    .rod__style__box{
+
+    .reel__style__box {
         display: flex;
         gap: 15px;
     }
-    .info__container, .description__container {
+
+    .info__container,
+    .description__container {
         margin-top: 15px;
     }
+
     .info__table {
         font-size: 16px;
     }
@@ -88,34 +99,42 @@
 }
 
 @media screen and (min-width:1024px) {
-    .rod__title {
+    .reel__title {
         margin-bottom: 20px;
     }
+
     .price__container {
         gap: 7px;
         font-size: 20px;
     }
+
     .price__title {
         font-size: 20px;
     }
+
     .info__table {
         font-size: 18px;
     }
-    .info__container{
+
+    .info__container {
         margin-top: 20px;
     }
-    .description__container{
+
+    .description__container {
         margin-top: 20px;
     }
 }
+
 @media screen and (min-width:1440px) {
-    .rod__title {
+    .reel__title {
         margin-bottom: 30px;
     }
-    .rod__style__box {
+
+    .reel__style__box {
         gap: 30px;
         justify-content: center;
     }
+
     .price__container {
         font-size: 22px;
     }

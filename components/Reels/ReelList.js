@@ -1,43 +1,89 @@
 "use client"
+import { useState, useEffect } from 'react';
+import MobileFiltersContainer from '../Filters/MobileFiltersContainer';
+import Filters from '../Filters/Filters';
+import ButtonMore from '../ButtonMore/ButtonMore';
+import Link from "next/link";
+import Image from "next/image";
+import styles from "./ReelList.module.css";
+import BuyButton from '../BuyButton/BuyButton';
 
-// ProductList.js
-// ProductList.js
-import React, { useState, useEffect } from 'react';
-
-const ProductList = () => {
-  const [products, setProducts] = useState([]);
+const ReelsList = ({reels}) => {
+  const [allReels, setAllReels] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(6);
+  const [productsPerPage, setProductsPerPage] = useState(10);
   const [filters, setFilters] = useState({
+    typereel: [],
     brand: [],
     series: [],
+    spoolSize: [],
+    dragMax: [],
+    dragSys: [],
+    ballBearing: [],
   });
+  const [typereelFilters, setTypereelFilters] = useState([]);
   const [brandsFilters, setBrandsFilters] = useState([]);
-  const [seriesFiletrs, setSeriesFilters] = useState([]);
-
-  // Функция для загрузки товаров из API
-  const fetchProducts = async () => {
-    try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/reels/predator`);
-      const data = await response.json();
-      const uniqueBrands = [...new Set(data.map((product) => product.brand))];
-      const uniqueSeries = [...new Set(data.map((product) => product.series))];
-      setBrandsFilters(uniqueBrands);
-      setSeriesFilters(uniqueSeries);
-      setProducts(data);
-    } catch (error) {
-      console.error('Error fetching products:', error);
-    }
-  };
+  const [seriesFilters, setSeriesFilters] = useState([]);
+  const [spoolSizeFilters, setSpoolSizeFilters] = useState([]);
+  const [dragMaxFilters, setDragMaxFilters] = useState([]);
+  const [dragSysFilters, setDragSysFilters] = useState([]);
+  const [ballBearingFilters, setBallBearingFilters] = useState([]);
 
   useEffect(() => {
-    fetchProducts();
+    const uniqueTypereels = [
+      ...new Set(
+        reels.map((reel) => reel.typereel).sort((a, b) => a.localeCompare(b))
+      ),
+    ];
+    const uniqueBrands = [
+      ...new Set(
+        reels.map((reel) => reel.brand).sort((a, b) => a.localeCompare(b))
+      ),
+    ];
+    const uniqueSeries = [
+      ...new Set(
+        reels.map((reel) => reel.series).sort((a, b) => a.localeCompare(b))
+      ),
+    ];
+    const uniqueSpoolSize = [
+      ...new Set(
+        reels
+          .map((reel) => reel.spoolSize)
+          .sort((a, b) => {
+            return a - b;
+          })
+      ),
+    ];
+    const uniqueDragMax = [
+      ...new Set(
+        reels
+          .map((reel) => reel.dragMax)
+          .sort((a, b) => {
+            return a - b;
+          })
+      ),
+    ];
+    const uniqueDragSys = [
+      ...new Set(
+        reels.map((reel) => reel.dragSys).sort((a, b) => a.localeCompare(b))
+      ),
+    ];
+    const uniqueBallBearing = [
+      ...new Set(
+        reels.map((reel) => reel.ballBearing).sort((a, b) => a.localeCompare(b))
+      ),
+    ];
+
+    setTypereelFilters(uniqueTypereels);
+    setBrandsFilters(uniqueBrands);
+    setSeriesFilters(uniqueSeries);
+    setSpoolSizeFilters(uniqueSpoolSize);
+    setDragMaxFilters(uniqueDragMax);
+    setDragSysFilters(uniqueDragSys);
+    setBallBearingFilters(uniqueBallBearing);
+    setAllReels(reels);
   }, []);
 
-  // Функция для изменения текущей страницы
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-  // Фильтрация по бренду и серии
   const handleFilterChange = (filterType, value) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
@@ -45,85 +91,206 @@ const ProductList = () => {
         ? prevFilters[filterType].filter((filter) => filter !== value)
         : [...prevFilters[filterType], value],
     }));
-    setCurrentPage(1); // Сбрасываем текущую страницу при изменении фильтров
+    setCurrentPage(1);
   };
 
-  // Отфильтрованные товары
-  const filteredProducts = products.filter(
-    (product) =>
-      (filters.brand.length === 0 || filters.brand.includes(product.brand)) &&
-      (filters.series.length === 0 || filters.series.includes(product.series))
+  const filteredProducts = allReels
+    .filter(
+      (reel) =>
+        (filters.typereel.length === 0 ||
+          filters.series.includes(reel.typereel)) &&
+        (filters.brand.length === 0 || filters.brand.includes(reel.brand)) &&
+        (filters.series.length === 0 || filters.series.includes(reel.series)) &&
+        (filters.spoolSize.length === 0 ||
+          filters.series.includes(reel.spoolSize)) &&
+        (filters.dragMax.length === 0 ||
+          filters.series.includes(reel.dragMax)) &&
+        (filters.dragSys.length === 0 ||
+          filters.series.includes(reel.dragSys)) &&
+        (filters.ballBearing.length === 0 ||
+          filters.series.includes(reel.ballBearing))
+    )
+    .sort((a, b) => {
+      const brandComparison = a.brand.localeCompare(b.brand);
+      if (brandComparison !== 0) return brandComparison;
+
+      const seriesComparison = a.series.localeCompare(b.series);
+      if (seriesComparison !== 0) return seriesComparison;
+
+      const modelComparison = a.model.localeCompare(b.model);
+      if (modelComparison !== 0) return modelComparison;
+
+      return a.name.localeCompare(b.name);
+    });
+
+  const currentProducts = filteredProducts.slice(
+    0,
+    currentPage * productsPerPage
   );
 
-  // Отображение кнопок пагинации
-  const renderPaginationButtons = () => {
-    const pageCount = Math.ceil(filteredProducts.length / itemsPerPage);
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
-    return Array.from({ length: pageCount }).map((_, index) => (
-      <button key={index} onClick={() => paginate(index + 1)}>
-        {index + 1}
-      </button>
-    ));
-  };
-
-  // Отображение товаров текущей страницы
-  const renderCurrentPageItems = () => {
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = filteredProducts.slice(indexOfFirstItem, indexOfLastItem);
-
-    return (
-      <ul>
-        {currentItems.map((product) => (
-          <li key={product._id}>
-                <p>{product.series}</p>
-            {/* Например: product.brand, product.series, product.models, и т.д. */}
-          </li>
-        ))}
-      </ul>
-    );
+  const loadMoreItems = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
   };
 
   return (
-    <div>
-      {/* Фильтры по бренду */}
+    <div className={`${styles.data__container}`}>
+      <MobileFiltersContainer>
+        <Filters
+          filtersList={typereelFilters}
+          filterState={filters.typereel}
+          nameFilterInObject={"typereel"}
+          handleFilterChange={handleFilterChange}
+          name={"Оберіть тип:"}
+        />
+        <Filters
+          filtersList={brandsFilters}
+          filterState={filters.brand}
+          nameFilterInObject={"brand"}
+          handleFilterChange={handleFilterChange}
+          name={"Оберіть бренд:"}
+        />
+        <Filters
+          filtersList={seriesFilters}
+          filterState={filters.series}
+          nameFilterInObject={"series"}
+          handleFilterChange={handleFilterChange}
+          name={"Оберіть серію:"}
+        />
+        <Filters
+          filtersList={spoolSizeFilters}
+          filterState={filters.spoolSize}
+          nameFilterInObject={"spoolSize"}
+          handleFilterChange={handleFilterChange}
+          name={"Оберіть розмір шпулі:"}
+        />
+        <Filters
+          filtersList={dragMaxFilters}
+          filterState={filters.dragMax}
+          nameFilterInObject={"dragMax"}
+          handleFilterChange={handleFilterChange}
+          name={"Оберіть тягу(кг):"}
+        />
+        <Filters
+          filtersList={dragSysFilters}
+          filterState={filters.dragSys}
+          nameFilterInObject={"dragSys"}
+          handleFilterChange={handleFilterChange}
+          name={"Оберіть фрікціон:"}
+        />
+        <Filters
+          filtersList={ballBearingFilters}
+          filterState={filters.ballBearing}
+          nameFilterInObject={"ballBearing"}
+          handleFilterChange={handleFilterChange}
+          name={"Оберіть підшипники:"}
+        />
+      </MobileFiltersContainer>
       <div>
-        {brandsFilters.map((brand) => (
-          <label key={brand}>
-            <input
-              type="checkbox"
-              checked={filters.brand.includes(brand)}
-              onChange={() => handleFilterChange("brand", brand)}
-            />
-            {brand}
-          </label>
-        ))}
-        {/* Добавьте чекбоксы для других брендов, если необходимо */}
+        <div className={styles.filters__container}>
+          <p className={styles.filters__title}>Фільтрація:</p>
+          <Filters
+            filtersList={typereelFilters}
+            filterState={filters.typereel}
+            nameFilterInObject={"typereel"}
+            handleFilterChange={handleFilterChange}
+            name={"Оберіть тип:"}
+          />
+          <Filters
+            filtersList={brandsFilters}
+            filterState={filters.brand}
+            nameFilterInObject={"brand"}
+            handleFilterChange={handleFilterChange}
+            name={"Оберіть бренд:"}
+          />
+          <Filters
+            filtersList={seriesFilters}
+            filterState={filters.series}
+            nameFilterInObject={"series"}
+            handleFilterChange={handleFilterChange}
+            name={"Оберіть серію:"}
+          />
+          <Filters
+            filtersList={spoolSizeFilters}
+            filterState={filters.spoolSize}
+            nameFilterInObject={"spoolSize"}
+            handleFilterChange={handleFilterChange}
+            name={"Оберіть розмір шпулі:"}
+          />
+          <Filters
+            filtersList={dragMaxFilters}
+            filterState={filters.dragMax}
+            nameFilterInObject={"dragMax"}
+            handleFilterChange={handleFilterChange}
+            name={"Оберіть тягу(кг):"}
+          />
+          <Filters
+            filtersList={dragSysFilters}
+            filterState={filters.dragSys}
+            nameFilterInObject={"dragSys"}
+            handleFilterChange={handleFilterChange}
+            name={"Оберіть фрікціон:"}
+          />
+          <Filters
+            filtersList={ballBearingFilters}
+            filterState={filters.ballBearing}
+            nameFilterInObject={"ballBearing"}
+            handleFilterChange={handleFilterChange}
+            name={"Оберіть підшипники:"}
+          />
+        </div>
       </div>
 
-      {/* Фильтры по серии */}
-      <div>
-        {seriesFiletrs.map((series) => (
-          <label key={series}>
-            <input
-              type="checkbox"
-              checked={filters.series.includes(series)}
-              onChange={() => handleFilterChange("series", series)}
-            />
-            {series}
-          </label>
-        ))}
-        {/* Добавьте чекбоксы для других серий, если необходимо */}
+      <div className={styles.reels__container}>
+        <ul className={styles.reels__list}>
+          {currentProducts.map((product) => (
+            <li key={product._id} className={styles.reels__item}>
+              <p className={styles.reels__article}>Артикль: {product.item}</p>
+              <Link
+                href={`/rybalski-snasti/katushky/${product._id}`}
+                className={styles.reels__link}
+              >
+                <Image
+                  src={product.img[0]}
+                  alt={product.alt}
+                  width={260}
+                  height={260}
+                  className={styles.reels__img}
+                  priority={true}
+                />
+                <h3 className={styles.reels__name}>{`${product.name} ${product.brand} ${product.series} ${product.model}`}</h3>
+
+                <p className={styles.reels__stock}>
+                  {product.stock ? "В наявності" : "Немає в наявності"}
+                </p>
+              </Link>
+              <div className={styles.reels__price__container}>
+                <p className={styles.reels__price}>
+                  Ціна:
+                  {parseFloat(product.price) *
+                    process.env.NEXT_PUBLIC_EXCHANGE}{" "}
+                  грн
+                </p>
+                {product.stock && <BuyButton />}
+              </div>
+            </li>
+          ))}
+        </ul>
+        {currentProducts.length === 0 && (
+          <p className={styles.reels__none}>
+            Вибачте, але товарів за обраними фільтрами не знайдено. Спробуйте
+            змінити запит.
+          </p>
+        )}
+
+        {currentPage !== totalPages && currentPage < totalPages && (
+          <ButtonMore onClick={loadMoreItems} />
+        )}
       </div>
-
-      {/* Товары текущей страницы */}
-      {renderCurrentPageItems()}
-
-      {/* Пагинация */}
-      <div>{renderPaginationButtons()}</div>
     </div>
   );
 };
 
-export default ProductList;
+export default ReelsList;
 

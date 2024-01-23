@@ -286,9 +286,11 @@ const RodsList = ({rods}) => {
                   className={styles.rods__img}
                   priority={true}
                 />
-                <h3
-                  className={styles.rods__name}
-                >{`${product.name} ${product.brand} ${product.series} ${product.model} ${product.rodSize}см ${product.testMin && `${product.testMin}-${product.testMax}г`}`}</h3>
+                <h3 className={styles.rods__name}>{`${product.name} ${
+                  product.brand
+                } ${product.series} ${product.model} ${product.rodSize}см ${
+                  product.testMin && `${product.testMin}-${product.testMax}г`
+                }`}</h3>
 
                 <p className={styles.rods__stock}>
                   {product.stock ? "В наявності" : "Немає в наявності"}
@@ -296,7 +298,9 @@ const RodsList = ({rods}) => {
               </Link>
               <div className={styles.rods__price__container}>
                 <p className={styles.rods__price}>
-                  Ціна: {product.price * process.env.NEXT_PUBLIC_EXCHANGE} грн
+                  Ціна:
+                  {parseFloat(product.price) * process.env.NEXT_PUBLIC_EXCHANGE}{" "}
+                  грн
                 </p>
                 {product.stock && <BuyButton />}
               </div>

@@ -40,8 +40,8 @@
 
 @media screen and (min-width:768px) {
     .main__image {
-        width: 370px;
-        height: 370px;
+        width: 350px;
+        height: 350px;
     }
     .thumbnail__container{
         margin-top: 15px;
