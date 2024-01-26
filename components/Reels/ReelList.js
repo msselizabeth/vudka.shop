@@ -259,7 +259,9 @@ const ReelsList = ({reels}) => {
                   className={styles.reels__img}
                   priority={true}
                 />
-                <h3 className={styles.reels__name}>{`${product.name} ${product.brand} ${product.series} ${product.model}`}</h3>
+                <h3
+                  className={styles.reels__name}
+                >{`${product.name} ${product.brand} ${product.series} ${product.model}`}</h3>
 
                 <p className={styles.reels__stock}>
                   {product.stock ? "В наявності" : "Немає в наявності"}
@@ -272,7 +274,17 @@ const ReelsList = ({reels}) => {
                     process.env.NEXT_PUBLIC_EXCHANGE}{" "}
                   грн
                 </p>
-                {product.stock && <BuyButton />}
+                {product.stock && (
+                  <BuyButton
+                    productId={product._id}
+                    productName={`${product.name} ${product.brand} ${product.series} ${product.model}`}
+                    productPrice={
+                      parseFloat(product.price) *
+                      process.env.NEXT_PUBLIC_EXCHANGE
+                    }
+                    productImg={product.img[0]}
+                  />
+                )}
               </div>
             </li>
           ))}

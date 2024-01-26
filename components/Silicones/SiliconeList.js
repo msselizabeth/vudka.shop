@@ -228,7 +228,7 @@ const SiliconesList = ({ silicones }) => {
                   />
                   <h3
                     className={styles.silicones__name}
-                  >{`${product.name} ${product.brand} ${product.series} ${product.size} мм`}</h3>
+                  >{`${product.name} ${product.brand} ${product.series} ${product.model}"`}</h3>
 
                   <p className={styles.silicones__stock}>
                     {product.stock ? "В наявності" : "Немає в наявності"}
@@ -243,7 +243,17 @@ const SiliconesList = ({ silicones }) => {
                     ).toFixed(2)}{" "}
                     грн
                   </p>
-                  {product.stock && <BuyButton />}
+                  {product.stock && (
+                    <BuyButton
+                      productId={product._id}
+                      productName={`${product.name} ${product.brand} ${product.series} ${product.model}"`}
+                      productPrice={
+                        parseFloat(product.price) *
+                        process.env.NEXT_PUBLIC_EXCHANGE
+                      }
+                      productImg={product.imgMain}
+                    />
+                  )}
                 </div>
               </li>
             ))}

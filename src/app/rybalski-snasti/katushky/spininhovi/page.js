@@ -1,3 +1,4 @@
+
 import ReelsList from "../../../../../components/Reels/ReelList";
 
 
@@ -20,6 +21,7 @@ export default async function SpininhoviKatushky() {
         <h1 className={"title"}>Спінінгові котушки</h1>
         <ReelsList reels={data.result} />
       </div>
+  
     </section>
   );
 }

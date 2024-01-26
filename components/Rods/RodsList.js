@@ -299,10 +299,26 @@ const RodsList = ({rods}) => {
               <div className={styles.rods__price__container}>
                 <p className={styles.rods__price}>
                   Ціна:
-                  {parseFloat(product.price) * process.env.NEXT_PUBLIC_EXCHANGE}{" "}
+                  {parseFloat(product.price) *
+                    process.env.NEXT_PUBLIC_EXCHANGE}{" "}
                   грн
                 </p>
-                {product.stock && <BuyButton />}
+                {product.stock && (
+                  <BuyButton
+                    productId={product._id}
+                    productName={`${product.name} ${product.brand} ${
+                      product.series
+                    } ${product.model} ${product.rodSize}см ${
+                      product.testMin &&
+                      `${product.testMin}-${product.testMax}г`
+                    }`}
+                    productPrice={
+                      parseFloat(product.price) *
+                      process.env.NEXT_PUBLIC_EXCHANGE
+                    }
+                    productImg={product.img[0]}
+                  />
+                )}
               </div>
             </li>
           ))}
