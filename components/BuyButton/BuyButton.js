@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./BuyButton.module.css";
 
 const BuyButton = ({ productId, productName, productPrice, productImg }) => {
