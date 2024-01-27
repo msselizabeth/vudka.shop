@@ -106,7 +106,17 @@ const SiliconeModelSelector = ({ models, silicone }) => {
                   </p>
                 )}
               </div>
-              {selectedModel.stock && <BuyButton />}
+              {selectedModel.stock && (
+                <BuyButton
+                  productId={selectedModel._id}
+                  productName={`${silicone.name} ${silicone.brand} ${silicone.series} ${silicone.model}" ${selectedModel.color}`}
+                  productPrice={
+                    parseFloat(silicone.price) *
+                    process.env.NEXT_PUBLIC_EXCHANGE
+                  }
+                  productImg={selectedModel.img}
+                />
+              )}
             </div>
 
             <h4 className={styles.select__info__title}>Характеристики:</h4>

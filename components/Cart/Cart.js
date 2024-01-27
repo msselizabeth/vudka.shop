@@ -4,6 +4,7 @@ import axios from "axios";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import styles from "./Cart.module.css";
+import Link from "next/link";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -20,7 +21,15 @@ const Cart = () => {
   const [isValidPhone, setIsValidPhone] = useState(true);
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [isOrderSuccess, setIsOrderSuccess] = useState(false);
+   const [isDataProcessingConfirmed, setIsDataProcessingConfirmed] =
+     useState(false);
+   const [dataProcessingError, setDataProcessingError] = useState("");
 
+   const handleDataProcessingConfirmation = () => {
+     setIsDataProcessingConfirmed(!isDataProcessingConfirmed);
+     setDataProcessingError(""); // Очищаємо текст помилки при зміні стану чекбокса
+   };
+  
   useEffect(() => {
     // Получение текущего состояния корзины из localStorage
     const currentCart = JSON.parse(localStorage.getItem("cart")) || {};
@@ -98,7 +107,11 @@ const Cart = () => {
 
    const handleSubmitOrder = async (e) => {
      e.preventDefault();
-
+      if (!isDataProcessingConfirmed) {
+        // Якщо чекбокс не відзначено, встановлюємо текст помилки
+        setDataProcessingError("Підтвердіть обробку персональних даних!");
+        return;
+      }
      // Валидация номера телефона и почтового адреса
      const isValidPhone = validatePhoneNumber(formData.phoneNumber);
      const isValidEmail = validateEmail(formData.email);
@@ -135,7 +148,6 @@ const Cart = () => {
            `${process.env.NEXT_PUBLIC_API_URL}/cart/addOrder`,
            orderData
          );
-         console.log("Ответ от сервера:", response.data);
 
          // Очистка формы после успешной отправки заказа
          setFormData({
@@ -154,8 +166,7 @@ const Cart = () => {
          setIsOrderSuccess(true);
         
        } catch (error) {
-         console.error("Ошибка при отправке заказа:", error);
-         // Обработка ошибок отправки заказа
+         console.error("Помилка при відправленні:", error);
        }
      }
    };
@@ -165,6 +176,8 @@ const Cart = () => {
     setIsOrderSuccess(false);
   };
 
+  
+
   return (
     <div>
       <h1 className="title">Корзина замовлення</h1>
@@ -172,113 +185,131 @@ const Cart = () => {
         <p style={{ textAlign: "center" }}>Ви ще не обрали жодного товару.</p>
       ) : (
         <div>
-          <ul>
+          <ul className={styles.cart__products__list}>
             {cartItems.map((item) => (
-              <li key={item.productId}>
+              <li key={item.productId} className={styles.cart__products__item}>
                 <Image
                   src={item.productImg}
                   alt={item.productName}
-                  width={100}
-                  height={100}
+                  width={60}
+                  height={60}
+                  className={styles.cart__products__img}
                 />
-                <p>
-                  {item.productName} - {item.productPrice} грн. за 1 шт.
-                  Кількість:
-                  <button
-                    onClick={() =>
-                      updateQuantity(item.productId, item.quantity - 1)
-                    }
-                  >
-                    -
-                  </button>
-                  <input
-                    type="number"
-                    value={item.quantity}
-                    onChange={(e) =>
-                      updateQuantity(
-                        item.productId,
-                        parseInt(e.target.value, 10)
-                      )
-                    }
-                  />
-                  <button
-                    onClick={() =>
-                      updateQuantity(item.productId, item.quantity + 1)
-                    }
-                  >
-                    +
-                  </button>
-                  <br />
-                  Всього: {item.productPrice * item.quantity} грн.
-                  <button onClick={() => removeFromCart(item.productId)}>
-                    Видалити із замовленння
-                  </button>
-                </p>
+                <div className={styles.cart__products__info__box}>
+                  <p>
+                    {item.productName} - {item.productPrice} грн.
+                  </p>
+                  <p className={styles.cart__products__qnt}>
+                    Кількість:
+                    <button
+                      className={styles.cart__products__qnt__btn}
+                      onClick={() =>
+                        updateQuantity(item.productId, item.quantity - 1)
+                      }
+                    >
+                      -
+                    </button>
+                    <input
+                      type="number"
+                      className={styles.cart__products__qnt__input}
+                      value={item.quantity}
+                      onChange={(e) =>
+                        updateQuantity(
+                          item.productId,
+                          parseInt(e.target.value, 10)
+                        )
+                      }
+                    />
+                    <button
+                      className={styles.cart__products__qnt__btn}
+                      onClick={() =>
+                        updateQuantity(item.productId, item.quantity + 1)
+                      }
+                    >
+                      +
+                    </button>
+                  </p>
+                  <p className={styles.cart__products__totalProdPrice}>
+                    Всього: {item.productPrice * item.quantity} грн.
+                    <button
+                      onClick={() => removeFromCart(item.productId)}
+                      className={styles.cart__products__delete__btn}
+                    >
+                      Видалити
+                    </button>
+                  </p>
+                </div>
               </li>
             ))}
           </ul>
-          <p>Загальна сума замовлення: {calculateTotal()} грн.</p>
+          <p className={styles.cart__products__totalPrice}>
+            Загальна сума замовлення: {calculateTotal()} грн.
+          </p>
 
-          <form onSubmit={handleSubmitOrder}>
+          <form onSubmit={handleSubmitOrder} className={styles.cart__form}>
             <h3>Оформлення замовлення:</h3>
-            <label>
+            <label className={styles.cart__label}>
               Введіть імʼя:
               <input
                 type="text"
                 name="firstName"
+                placeholder="Ваше імʼя для доставки"
                 value={formData.firstName}
                 onChange={handleInputChange}
                 required
               />
             </label>
-            <br />
-            <label>
+
+            <label className={styles.cart__label}>
               Введіть призвіще:
               <input
                 type="text"
                 name="lastName"
+                placeholder="Ваше призвіще для доставки"
                 value={formData.lastName}
                 onChange={handleInputChange}
                 required
               />
             </label>
-            <br />
-            <label>
-              Електронна пошта:
+
+            <label className={styles.cart__label}>
+              Електронна пошта(сповіщення замовлення):
               <input
                 type="email"
                 name="email"
+                placeholder="Ваше справжня пошта"
                 value={formData.email}
                 onChange={handleInputChange}
                 required
                 className={!isValidEmail ? "invalid" : ""}
               />
               {!isValidEmail && (
-                <p className="error-message">
+                <p className={styles.errorMessage}>
                   Введіть коректну адресу електронної пошти!
                 </p>
               )}
             </label>
-            <br />
-            <label>
-              Номер телефону:
+
+            <label className={styles.cart__label}>
+              Номер телефону(для доставки):
               <input
                 type="tel"
                 name="phoneNumber"
+                placeholder="Почніть з +380 або 099"
                 value={formData.phoneNumber}
                 onChange={handleInputChange}
                 required
                 className={!isValidPhone ? "invalid" : ""}
               />
               {!isValidPhone && (
-                <p className="error-message">
+                <p className={styles.errorMessage}>
                   Введіть коректний номер телефону (наприклад, +380501234567)
                 </p>
               )}
             </label>
-            <br />
-            <label>
-              Область:
+
+            <label className={styles.cart__label}>
+              Область доставки:
               <select
                 name="region"
                 value={formData.region}
@@ -318,39 +349,63 @@ const Cart = () => {
                 <option value="Чернігівська">Чернігівська область</option>
               </select>
             </label>
-            <br />
-            <label>
-              Населений пункт:
+
+            <label className={styles.cart__label}>
+              Населений пункт доставки:
               <input
                 type="text"
                 name="locality"
+                placeholder="Назва вашого населеного пункту"
                 value={formData.locality}
                 onChange={handleInputChange}
                 required
               />
             </label>
-            <br />
-            <label>
+
+            <label className={styles.cart__label}>
               Відділення "Нової пошти":
               <input
                 type="text"
                 name="postOffice"
+                placeholder={` Номер ввіділення \"Нової пошти\" `}
                 value={formData.postOffice}
                 onChange={handleInputChange}
                 required
               />
             </label>
-            <br />
-            <label>
+
+            <label className={styles.cart__label}>
               Коментар(за бажанням):
               <textarea
                 name="comment"
+                placeholder="Введіть текст тут..."
                 value={formData.comment}
                 onChange={handleInputChange}
               />
             </label>
-            <br />
-            <button type="submit">Відправити замовлення</button>
+
+            <label className={styles.cart__label__confirm}>
+              <input
+                type="checkbox"
+                checked={isDataProcessingConfirmed}
+                onChange={handleDataProcessingConfirmation}
+              />
+              <p>
+                Підтверджую обробку персональних даних та
+                <Link href="/" className={styles.confirm__link}>
+                  умови користування
+                </Link>.
+              </p>
+            </label>
+            {dataProcessingError && (
+              <p className={styles.errorMessage}>{dataProcessingError}</p>
+            )}
+
+            <div className={styles.cart__form___submit__container}>
+              <button type="submit" className={styles.cart__form___submit__btn}>
+                Відправити замовлення
+              </button>
+            </div>
           </form>
         </div>
       )}
