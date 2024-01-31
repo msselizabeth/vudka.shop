@@ -7,6 +7,7 @@ import Filters from "../Filters/Filters";
 import MobileFiltersContainer from "../Filters/MobileFiltersContainer";
 import BuyButton from "../BuyButton/BuyButton";
 import ButtonMore from "../ButtonMore/ButtonMore";
+import { calcMainPrice, calcSalePrice } from "../../helpers/price-calc";
 
 const SiliconesList = ({ silicones }) => {
     const [allSilicones, setAllSelicones] = useState([]);
@@ -234,27 +235,23 @@ const SiliconesList = ({ silicones }) => {
                     {product.stock ? "В наявності" : "Немає в наявності"}
                   </p>
                 </Link>
-                <div className={styles.silicones__price__container}>
-                  <p className={styles.silicones__price}>
-                    Ціна:{" "}
-                    {(
-                      parseFloat(product.price) *
-                      process.env.NEXT_PUBLIC_EXCHANGE
-                    ).toFixed(2)}{" "}
-                    грн
-                  </p>
-                  {product.stock && (
-                    <BuyButton
-                      productId={product._id}
-                      productName={`${product.name} ${product.brand} ${product.series} ${product.model}"`}
-                      productPrice={
-                        parseFloat(product.price) *
-                        process.env.NEXT_PUBLIC_EXCHANGE
-                      }
-                      productImg={product.imgMain}
-                    />
+                <ul className={styles.prices__list}>
+                  <li>
+                    <p
+                      className={`${styles.silicones__price} ${
+                        process.env.NEXT_PUBLIC_SALE_MODE === "true"
+                          ? styles.sale
+                          : ""
+                      }`}
+                    >{`Ціна: ${calcMainPrice(product.price)} грн`}</p>
+                  </li>
+                  {process.env.NEXT_PUBLIC_SALE_MODE === "true" && (
+                    <li>
+                      <p
+                        className={`${styles.silicones__price} ${styles.silicones__price__sale}`}>{`Ціна: ${calcSalePrice(product.price)} грн`}</p>
+                    </li>
                   )}
-                </div>
+                </ul>
               </li>
             ))}
           </ul>

@@ -1,115 +1,142 @@
-
-.filters__container{
+.filters__container {
     display: none;
 }
-.rods__article{
+
+.rods__article {
     margin-left: 10px;
     margin-bottom: 10px;
     font-weight: 300;
 }
-.rods__list{
+
+.rods__list {
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 15px;
     margin-top: 15px;
 }
-.rods__item{
+
+.rods__item {
     padding: 10px;
-        border-radius: 20px;
-        border: 0.5px solid var(--primary-text-color);
-        border-radius: 30px;
-            background: var(--back-section);
-            box-shadow: 0px 0px 10px 2px rgba(11, 128, 144, 0.45);
+    border-radius: 20px;
+    border: 0.5px solid var(--primary-text-color);
+    border-radius: 30px;
+    background: var(--back-section);
+    box-shadow: 0px 0px 10px 2px rgba(11, 128, 144, 0.45);
 }
-.rods__item:hover, .rods__item:focus {
+
+.rods__item:hover,
+.rods__item:focus {
     box-shadow: inset 1px 1px 12px var(--box-shadow-color-hover);
     border: 0.5px solid var(--box-shadow-color-hover);
 }
-.rods__link{
+
+.rods__link {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.rods__img{
-        border-radius: 10px;
-        border: 0.3px solid rgba(11, 128, 144, 0.45);
+
+.rods__img {
+    border-radius: 10px;
+    border: 0.3px solid rgba(11, 128, 144, 0.45);
 }
-.rods__name{
+
+.rods__name {
     text-align: center;
     margin-top: 15px;
     font-size: 16px;
 }
+
 .rods__stock {
     margin-top: 10px;
     color: var(--icons-color-hover);
     font-size: 17px;
     font-weight: 700;
 }
-.rods__price__container{
+
+.price__container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px;
+    margin-top: 10px;
+    padding-left: 10px;
+    padding-right: 2px;
 }
-.rods__price{
-    display: flex;
-        justify-content: center;
-        align-items: center;
+
+.prices__list {
+    margin-top: 10px;
+    margin-bottom: 7px;
+}
+
+.rods__price {
     font-size: 18px;
     font-weight: 500;
-    height: 38.5px;
-    
 }
-.rods__none{
+
+.sale {
+    text-decoration: line-through;
+}
+
+.rods__price__sale {
+    color: red;
+    text-decoration: none;
+}
+
+.rods__none {
     margin-top: 10px;
     text-align: center;
-   
+
 }
+
 @media screen and (min-width:375px) {
     .rods__img {
         width: 320px;
         height: 320px;
     }
 }
+
 @media screen and (min-width:425px) {
     .rods__img {
         width: 350px;
         height: 350px;
     }
 }
-@media screen and (min-width:768px){
-  .rods__list{
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: start;
-    gap: 18px;
-  }
-  .rods__item{
-    width: 335px;
-  }
-   .rods__img {
-       width: 305px;
-       height: 305px;
-   }
-  .rods__name{
-    font-size: 17px;
-  }
-  .rods__price{
-    height: 45px;
-  }
+
+@media screen and (min-width:768px) {
+    .rods__list {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: start;
+        gap: 18px;
+    }
+
+    .rods__item {
+        width: 335px;
+    }
+
+    .rods__img {
+        width: 305px;
+        height: 305px;
+    }
+
+    .rods__name {
+        font-size: 17px;
+    }
 }
 
 @media screen and (min-width:1024px) {
-    .data__container{
+    .data__container {
         display: flex;
         gap: 20px;
     }
-    .filters__title{
+
+    .filters__title {
         font-weight: 700;
         text-align: center;
     }
+
     .filters__container {
         display: flex;
         flex-direction: column;
@@ -118,32 +145,50 @@
         margin-top: 10px;
         padding: 5px;
         border-radius: 20px;
-            border: 0.5px solid var(--primary-text-color);
-            border-radius: 30px;
-            background: var(--back-section);
-            box-shadow: 0px 0px 10px 2px rgba(11, 128, 144, 0.45);
-        
+        border: 0.5px solid var(--primary-text-color);
+        border-radius: 30px;
+        background: var(--back-section);
+        box-shadow: 0px 0px 10px 2px rgba(11, 128, 144, 0.45);
+
     }
-    .rods__container{
+
+    .rods__container {
         width: 723px;
-        
+
     }
-    .rods__item{
+
+    .rods__item {
         width: 352px
     }
-    .rods__img{
+
+    .rods__name {
+        font-size: 18px;
+    }
+
+    .rods__stock {
+        font-size: 18px;
+    }
+
+    .rods__img {
         width: 330px;
         height: 330px;
+        border-radius: 15px;
+        border: 1px solid rgba(11, 128, 144, 0.45);
     }
-    .rods__article{
+
+    .rods__article {
         font-size: 15px;
     }
-   
-        .rods__none {
-            margin-top: 180px;
-            text-align: center;
-    
-        }
+
+    .rods__price {
+        font-size: 20px;
+    }
+
+    .rods__none {
+        margin-top: 180px;
+        text-align: center;
+
+    }
 }
 
 @media screen and (min-width:1440px) {
@@ -156,23 +201,39 @@
         padding: 5px;
 
     }
-    .rods__list{
+
+    .rods__list {
         gap: 15px;
     }
- 
-    .rods__item{
+
+    .rods__item {
         width: 360px;
     }
-    .rods__img{
+
+    .rods__name {
+        font-size: 19px;
+    }
+
+    .rods__stock {
+        font-size: 19px;
+    }
+
+    .rods__img {
         width: 340px;
         height: 340px;
 
     }
+
     .rods__container {
         width: 1150px;
     }
-    .rods__article{
+
+    .rods__article {
         font-size: 16px;
+    }
+
+    .rods__price {
+        font-size: 21px;
     }
 
 }

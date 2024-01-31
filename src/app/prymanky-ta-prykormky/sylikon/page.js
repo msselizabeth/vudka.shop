@@ -12,7 +12,7 @@ async function getData() {
 
 export default async function Sylicon() {
   const data = await getData();
-
+   
   return (
     <section className="section">
       <div className="container">

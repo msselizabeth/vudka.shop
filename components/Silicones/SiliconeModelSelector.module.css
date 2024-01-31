@@ -66,12 +66,23 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    
 }
 .price__container{
-    display: flex;
-    align-items: center;
-    gap: 7px;
     margin-top: 10px;
+    margin-bottom: 7px;
+}
+.silicones__price {
+    font-size: 18px;
+    font-weight: 500;
+}
+.sale {
+    text-decoration: line-through;
+}
+
+.silicones__price__sale {
+    color: red;
+    text-decoration: none;
 }
 .select__stock__text {
     color: var(--icons-color-hover);
@@ -127,6 +138,7 @@
         gap: 10px;
         margin-top: 12px;
     }
+    
   
 
 }
@@ -175,13 +187,6 @@
         margin-top: 15px;
     }
 
-    .select__price__title {
-        font-size: 18px;
-    }
-
-    .select__price__value {
-        font-size: 18px;
-    }
     .select__stock__text{
         font-size: 18px;
     }
@@ -235,14 +240,9 @@
         gap: 10px;
         margin-top: 15px;
     }
-
-    .select__price__title {
-        font-size: 20px;
-    }
-
-    .select__price__value {
-        font-size: 20px;
-    }
+          .silicones__price {
+              font-size: 20px;
+          }
     .select__stock__text {
         font-size: 20px;
     }
@@ -301,13 +301,9 @@
         margin-top: 25px;
     }
 
-    .select__price__title {
-        font-size: 22px;
-    }
-
-    .select__price__value {
-        font-size: 22px;
-    }
+         .silicones__price {
+             font-size: 22px;
+         }
 
     .select__stock__text {
         font-size: 22px;

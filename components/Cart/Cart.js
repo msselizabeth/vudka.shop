@@ -47,7 +47,7 @@ const Cart = () => {
     return cartItems.reduce(
       (total, item) => total + item.productPrice * item.quantity,
       0
-    );
+    ).toFixed(2);
   };
 
   const removeFromCart = (productId) => {
@@ -197,7 +197,7 @@ const Cart = () => {
                 />
                 <div className={styles.cart__products__info__box}>
                   <p>
-                    {item.productName} - {item.productPrice} грн.
+                    {item.productName} - {(item.productPrice).toFixed(2)} грн.
                   </p>
                   <p className={styles.cart__products__qnt}>
                     Кількість:
@@ -230,7 +230,7 @@ const Cart = () => {
                     </button>
                   </p>
                   <p className={styles.cart__products__totalProdPrice}>
-                    Всього: {item.productPrice * item.quantity} грн.
+                    Всього: {(item.productPrice * item.quantity).toFixed(2)} грн.
                     <button
                       onClick={() => removeFromCart(item.productId)}
                       className={styles.cart__products__delete__btn}

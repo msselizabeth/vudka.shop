@@ -7,6 +7,7 @@ import ButtonMore from "../ButtonMore/ButtonMore";
 import Link from "next/link";
 import Image from "next/image";
 import BuyButton from "../BuyButton/BuyButton";
+import { calcMainPrice, calcSalePrice } from "../../helpers/price-calc";
 
 const RodsList = ({rods}) => {
   const [allRods, setAllRods] = useState([]);
@@ -296,25 +297,42 @@ const RodsList = ({rods}) => {
                   {product.stock ? "В наявності" : "Немає в наявності"}
                 </p>
               </Link>
-              <div className={styles.rods__price__container}>
-                <p className={styles.rods__price}>
-                  Ціна:
-                  {parseFloat(product.price) *
-                    process.env.NEXT_PUBLIC_EXCHANGE}{" "}
-                  грн
-                </p>
+              <div className={styles.price__container}>
+                  <ul className={styles.prices__list}>
+                    <li>
+                      <p
+                        className={`${styles.rods__price} ${
+                          process.env.NEXT_PUBLIC_SALE_MODE === "true"
+                            ? styles.sale
+                            : ""
+                        }`}
+                      >
+                        {`Ціна: ${calcMainPrice(product.price)} грн`}
+                      </p>
+                    </li>
+                    {process.env.NEXT_PUBLIC_SALE_MODE === "true" && (
+                      <li
+                        className={`${styles.rods__price} ${styles.rods__price__sale}`}
+                      >
+                        <p>{`Ціна: ${calcSalePrice(product.price)} грн`}</p>
+                      </li>
+                    )}
+                  </ul>
+                 
+          
+
                 {product.stock && (
                   <BuyButton
                     productId={product._id}
-                    productName={`${product.name} ${product.brand} ${
-                      product.series
-                    } ${product.model} ${product.rodSize}см ${
-                      product.testMin &&
-                      `${product.testMin}-${product.testMax}г`
+                    productName={`${product.name} ${product.brand} ${product.series} ${
+                      product.model
+                    } ${product.rodSize}см ${
+                      product.testMin && `${product.testMin}-${product.testMax}г`
                     }`}
                     productPrice={
-                      parseFloat(product.price) *
-                      process.env.NEXT_PUBLIC_EXCHANGE
+                      process.env.NEXT_PUBLIC_SALE_MODE === "true"
+                        ? calcSalePrice(product.price)
+                        : calcMainPrice(product.price)
                     }
                     productImg={product.img[0]}
                   />

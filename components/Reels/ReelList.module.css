@@ -56,27 +56,37 @@
     font-weight: 700;
 }
 
-.reels__price__container {
+.price__container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px;
+    margin-top: 10px;
+    padding-left: 10px;
+    padding-right: 2px;
+}
+
+.prices__list {
+    margin-top: 10px;
+    margin-bottom: 7px;
 }
 
 .reels__price {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-size: 18px;
     font-weight: 500;
-    height: 38.5px;
+}
 
+.sale {
+    text-decoration: line-through;
+}
+
+.reels__price__sale {
+    color: red;
+    text-decoration: none;
 }
 
 .reels__none {
     margin-top: 10px;
     text-align: center;
-
 }
 
 @media screen and (min-width:375px) {
@@ -114,9 +124,6 @@
         font-size: 17px;
     }
 
-    .reels__price {
-        height: 45px;
-    }
 }
 
 @media screen and (min-width:1024px) {
@@ -154,13 +161,27 @@
         width: 352px
     }
 
+    .reels__name {
+        font-size: 18px;
+    }
+
+    .reels__stock {
+        font-size: 18px;
+    }
+
     .reels__img {
         width: 330px;
         height: 330px;
+        border-radius: 15px;
+        border: 1px solid rgba(11, 128, 144, 0.45);
     }
 
     .reels__article {
         font-size: 15px;
+    }
+
+    .reels__price {
+        font-size: 20px;
     }
 
     .reels__none {
@@ -193,6 +214,18 @@
         width: 340px;
         height: 340px;
 
+    }
+
+    .reels__name {
+        font-size: 19px;
+    }
+
+    .reels__stock {
+        font-size: 19px;
+    }
+
+    .reels__price {
+        font-size: 21px;
     }
 
     .reels__container {

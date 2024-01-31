@@ -56,21 +56,20 @@
     font-weight: 700;
 }
 
-.silicones__price__container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
+.prices__list{
+    padding: 10px;
 }
-
 .silicones__price {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-size: 18px;
     font-weight: 500;
-    height: 38.5px;
+}
 
+.sale{
+    text-decoration: line-through;
+}
+.silicones__price__sale{
+    color: red;
+    text-decoration: none;
 }
 
 .silicones__none {
@@ -114,9 +113,6 @@
         font-size: 17px;
     }
 
-    .silicones__price {
-        height: 45px;
-    }
 }
 
 @media screen and (min-width:1024px) {
@@ -145,6 +141,10 @@
 
     }
 
+         .silicones__name {
+             font-size: 18px;
+         }
+
     .silicones__container {
         width: 723px;
 
@@ -157,11 +157,21 @@
     .silicones__img {
         width: 330px;
         height: 330px;
+        border-radius: 15px;
+        border: 1px solid rgba(11, 128, 144, 0.45);
+            
     }
-
+    
     .silicones__article {
         font-size: 15px;
     }
+    
+        .prices__list {
+            padding: 15px;
+        }
+        .silicones__price{
+            font-size: 20px;
+        }
 
     .silicones__none {
         margin-top: 180px;
@@ -180,7 +190,9 @@
         padding: 5px;
 
     }
-
+        .silicones__name {
+            font-size: 19px;
+        }
     .silicones__list {
         gap: 15px;
     }
@@ -202,5 +214,9 @@
     .silicones__article {
         font-size: 16px;
     }
+
+         .silicones__price {
+             font-size: 22px;
+         }
 
 }

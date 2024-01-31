@@ -24,6 +24,9 @@ export const MobileMenu = () => {
     rybalskiSnasti: false,
     osnashchennya: false,
     prymankyPrykormky: false,
+    camping: false,
+    odyah: false,
+    сhovnyDvyhuny: false,
   });
 
   const toggleInnerMenu = (menu) => {
@@ -199,6 +202,117 @@ export const MobileMenu = () => {
                   })}
                 </ul>
               </li>
+              <li>
+                <div className={styles.mob__item__cont}>
+                  <Link
+                    href="/camping"
+                    className={styles.mob__link}
+                    onClick={toggleMenu}
+                  >
+                    Кемпінг
+                  </Link>
+                  <button
+                    className={styles.mob__inner__btn}
+                    type="button"
+                    onClick={() => toggleInnerMenu("camping")}
+                  >
+                    <MobInnerMenuIcon />
+                  </button>
+                </div>
+                {/* <ul
+                  className={`${styles.mob__inner__list} ${
+                    innerMenuStates.rybalskiSnasti ? styles.active : ""
+                  }`}
+                >
+                  {rybalskiSnastiMenu.map(({ id, path, name }) => {
+                    return (
+                      <li key={id} className={styles.mob__inner__item}>
+                        <Link
+                          href={path}
+                          className={styles.mob__link}
+                          onClick={toggleMenu}
+                        >
+                          {name}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul> */}
+              </li>
+              <li>
+                <div className={styles.mob__item__cont}>
+                  <Link
+                    href="/odyah"
+                    className={styles.mob__link}
+                    onClick={toggleMenu}
+                  >
+                    Одяг
+                  </Link>
+                  <button
+                    className={styles.mob__inner__btn}
+                    type="button"
+                    onClick={() => toggleInnerMenu("odyah")}
+                  >
+                    <MobInnerMenuIcon />
+                  </button>
+                </div>
+                {/* <ul
+                  className={`${styles.mob__inner__list} ${
+                    innerMenuStates.rybalskiSnasti ? styles.active : ""
+                  }`}
+                >
+                  {rybalskiSnastiMenu.map(({ id, path, name }) => {
+                    return (
+                      <li key={id} className={styles.mob__inner__item}>
+                        <Link
+                          href={path}
+                          className={styles.mob__link}
+                          onClick={toggleMenu}
+                        >
+                          {name}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul> */}
+              </li>
+              <li>
+                <div className={styles.mob__item__cont}>
+                  <Link
+                    href="/dvyhuny"
+                    className={styles.mob__link}
+                    onClick={toggleMenu}
+                  >
+                    Човни та двигуни
+                  </Link>
+                  <button
+                    className={styles.mob__inner__btn}
+                    type="button"
+                    onClick={() => toggleInnerMenu("сhovnyDvyhuny")}
+                  >
+                    <MobInnerMenuIcon />
+                  </button>
+                </div>
+                {/* <ul
+                  className={`${styles.mob__inner__list} ${
+                    innerMenuStates.rybalskiSnasti ? styles.active : ""
+                  }`}
+                >
+                  {rybalskiSnastiMenu.map(({ id, path, name }) => {
+                    return (
+                      <li key={id} className={styles.mob__inner__item}>
+                        <Link
+                          href={path}
+                          className={styles.mob__link}
+                          onClick={toggleMenu}
+                        >
+                          {name}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul> */}
+              </li>
             </ul>
             <div className={styles.contacts__container}>
               <p className={styles.contacts__text}>Контакти:</p>
@@ -213,10 +327,10 @@ export const MobileMenu = () => {
                 </li>
                 <li>
                   <Link
-                    href={"mailto:michaelsheremet@gmail.com"}
+                    href={"mailto:vudkashop@gmail.com"}
                     className={styles.contacts__link}
                   >
-                    <MailIcon /> michaelsheremet@gmail.com
+                    <MailIcon /> vudkashop@gmail.com
                   </Link>
                 </li>
               </ul>
@@ -231,13 +345,17 @@ export const MobileMenu = () => {
                       "https://www.instagram.com/supmarket_rybalka?igsh=ZDE1MWVjZGVmZQ=="
                     }
                     className={styles.social__link}
-                  ><InstaIcon /></Link>
+                  >
+                    <InstaIcon />
+                  </Link>
                 </li>
                 <li>
                   <Link
                     href={"https://www.facebook.com/supmarketrybalka"}
                     className={styles.social__link}
-                  ><FacebookIcon /></Link>
+                  >
+                    <FacebookIcon />
+                  </Link>
                 </li>
               </ul>
             </div>

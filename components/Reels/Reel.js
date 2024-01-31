@@ -1,6 +1,7 @@
 import BuyButton from "../BuyButton/BuyButton";
 import { Carousel } from "../Carousel/Carousel";
 import styles from "./Reel.module.css";
+import { calcMainPrice, calcSalePrice } from "../../helpers/price-calc";
 
  const Reel = ({ reel }) => {
   return (
@@ -11,25 +12,49 @@ import styles from "./Reel.module.css";
       <div className={styles.reel__style__box}>
         <Carousel images={reel.img} alt={reel.alt} />
         <div>
-          <div className={styles.priceBtn__container}>
+          <div className={styles.price__container}>
             <div>
-              <div className={styles.price__container}>
-                <h2 className={styles.price__title}>Ціна: </h2>
-                <p>
-                  {(
-                    parseFloat(reel.price) * process.env.NEXT_PUBLIC_EXCHANGE
-                  ).toFixed(2)}{" "}
-                  грн
-                </p>
-              </div>
+              <ul className={styles.prices__list}>
+                <li>
+                  <p
+                    className={`${styles.reel__price} ${
+                      process.env.NEXT_PUBLIC_SALE_MODE === "true"
+                        ? styles.sale
+                        : ""
+                    }`}
+                  >
+                    {`Ціна: ${calcMainPrice(reel.price)} грн`}
+                  </p>
+                </li>
+                {process.env.NEXT_PUBLIC_SALE_MODE === "true" && (
+                  <li>
+                    <p
+                      className={`${styles.reel__price} ${styles.reel__price__sale}`}
+                    >{`Ціна: ${calcSalePrice(reel.price)} грн`}</p>
+                  </li>
+                )}
+              </ul>
               {reel.stock ? (
-                <p className={styles.stock__text}>в наявності</p>
+                <p className={styles.stock__text}>{`в наявності`}</p>
               ) : (
-                <p className={styles.stock__text}>немає в наявності</p>
+                <p className={styles.stock__text}>{`немає в наявності`}</p>
               )}
             </div>
-            {reel.stock && <BuyButton />}
+
+            {reel.stock && (
+              <BuyButton
+                productId={reel._id}
+                productName={`${reel.name} ${reel.brand} ${reel.series} ${reel.model}`}
+                productPrice={
+                  process.env.NEXT_PUBLIC_SALE_MODE === "true"
+                    ? calcSalePrice(reel.price)
+                    : calcMainPrice(reel.price)
+                }
+                productImg={reel.img[0]}
+              />
+            )}
           </div>
+
           <div className={styles.info__container}>
             <h2 className="title">Характеристики:</h2>
             <table className={styles.info__table}>
@@ -39,22 +64,20 @@ import styles from "./Reel.module.css";
                   <td className={styles.td}>{reel.item}</td>
                 </tr>
 
-                  <tr>
-                    <th className={styles.th}>Розмір шпулі:</th>
-                    <td className={styles.td}>{reel.spoolSize}</td>
-                  </tr>
+                <tr>
+                  <th className={styles.th}>Розмір шпулі:</th>
+                  <td className={styles.td}>{reel.spoolSize}</td>
+                </tr>
 
+                <tr>
+                  <th className={styles.th}>Жилкомісткість:</th>
+                  <td className={styles.td}>{reel.lineCapacity}</td>
+                </tr>
 
-                  <tr>
-                    <th className={styles.th}>Жилкомісткість:</th>
-                    <td className={styles.td}>{reel.lineCapacity}</td>
-                  </tr>
-
-
-                  <tr>
-                    <th className={styles.th}>Намотування (оберт, см):</th>
-                    <td className={styles.td}>{reel.lineRetrieve}</td>
-                  </tr>
+                <tr>
+                  <th className={styles.th}>Намотування (оберт, см):</th>
+                  <td className={styles.td}>{reel.lineRetrieve}</td>
+                </tr>
 
                 <tr>
                   <th className={styles.th}>Редукція:</th>

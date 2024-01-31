@@ -2,7 +2,7 @@
     margin-bottom: 10px;
 }
 
-.priceBtn__container {
+.price__container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -11,16 +11,23 @@
     padding-right: 2px;
 }
 
-.price__container {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 18px;
-    font-weight: 700;
+.prices__list {
+    margin-top: 10px;
+    margin-bottom: 7px;
 }
 
-.price__title {
+.reel__price {
     font-size: 18px;
+    font-weight: 500;
+}
+
+.sale {
+    text-decoration: line-through;
+}
+
+.reel__price__sale {
+    color: red;
+    text-decoration: none;
 }
 
 .stock__text {
@@ -103,12 +110,11 @@
         margin-bottom: 20px;
     }
 
-    .price__container {
-        gap: 7px;
+    .reel__price {
         font-size: 20px;
     }
 
-    .price__title {
+    .stock__text {
         font-size: 20px;
     }
 
@@ -135,15 +141,20 @@
         justify-content: center;
     }
 
-    .price__container {
+    .reel__price {
         font-size: 22px;
     }
 
-    .price__title {
+    .stock__text {
         font-size: 22px;
     }
 
     .info__table {
         font-size: 20px;
+    }
+
+    .th,
+    .td {
+        padding: 10px;
     }
 }

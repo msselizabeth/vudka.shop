@@ -24,4 +24,9 @@ export const mainNav = [
     path: "/odyah",
     name: "Одяг",
   },
+  {
+    id: 6,
+    path: "/dvyhuny",
+    name: "Човни та двигуни",
+  },
 ];

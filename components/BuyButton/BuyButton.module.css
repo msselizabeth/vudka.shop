@@ -35,15 +35,62 @@
 
 
 .modal {
-    background-color: #fff;
+    width: 300px;
+    
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 10px;
+    background-color: rgba(254, 253, 232, 1);
+    border: 0.5px solid var(--primary-text-color);
     text-align: center;
 }
-
-.modal button {
-    margin-right: 10px;
+.modal__title{
+    font-weight: 700;
+    font-size: 17px;
 }
+.modal__buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+.modal__btn{
+    width: 120px;
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 10px;
+}
+
+.modal__btn__back {
+    background-color: var(--buttons-back-color);
+        border-radius: 20px;
+        box-shadow: 0px 0px 12px 3px var(--box-shadow-color);
+        border: 0.5px solid var(--buttons-back-color);
+        color: var(--primary-links-color);
+transition: var(--transition);
+}
+.modal__btn__back:hover,
+.modal__btn__back:focus {
+    color: var(--icons-color-hover);
+    background: var(--primary-links-color);
+    border: 0.5px solid var(--icons-color-hover);
+}
+
+.modal__btn__cart{
+    background-color: var(--primary-links-color);
+        border-radius: 20px;
+        border: 0.5px solid var(--icons-color-hover);
+        color: var(--icons-color-hover);
+        transition: var(--transition);
+}
+
+.modal__btn__cart:hover,
+.modal__btn__cart:focus {
+    color: var(--primary-links-color);
+    background: var(--buttons-back-color);
+    border: 0.5px solid var(--buttons-back-color);
+}
+
 
 @media screen and (min-width:425px) {
     .buy__btn{
@@ -58,6 +105,24 @@
         font-size: 17px;
         padding: 10px;
     }
+
+    .modal{
+        width: 400px;
+    }
+
+    .modal__title{
+        font-size: 19px;
+    }
+                .modal__buttons {
+                    gap: 30px;
+                    margin-top: 15px;
+                }
+        .modal__btn {
+            width: 150px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 30px;
+        }
 }
 
 @media screen and (min-width:1024px) {
@@ -66,5 +131,25 @@
         font-size: 18px;
         padding: 12px;
     }
+
+         .modal {
+             width: 550px;
+            border-radius: 20px;
+         }
+             
+         .modal__title {
+             font-size: 21px;
+         }
+
+                         .modal__buttons {
+                             gap: 45px;
+                             margin-top: 20px;
+                         }
+    
+         .modal__btn {
+             width: 180px;
+             padding: 10px;
+             font-size: 18px;
+         }
 }
 

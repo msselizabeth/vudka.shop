@@ -48,9 +48,11 @@ const BuyButton = ({ productId, productName, productPrice, productImg }) => {
       {isModalVisible && (
         <div className={styles.modal__overlay}>
           <div className={styles.modal}>
-            <p>Товар успешно добавлен в корзину!</p>
-            <button onClick={closeModal}>Продолжить покупки</button>
-            <a href="/cart">Перейти в корзину</a>
+            <p className={styles.modal__title}>Товар успішно додано до кошика!</p>
+            <div className={styles.modal__buttons}>
+              <button onClick={closeModal} type="button" className={`${styles.modal__btn} ${styles.modal__btn__back}`}>Продовжити покупки</button>
+              <a href="/cart" className={`${styles.modal__btn} ${styles.modal__btn__cart}`}>Перейти до кошика</a>
+            </div>
           </div>
         </div>
       )}

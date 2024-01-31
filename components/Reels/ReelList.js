@@ -7,6 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./ReelList.module.css";
 import BuyButton from '../BuyButton/BuyButton';
+import { calcMainPrice, calcSalePrice } from '../../helpers/price-calc';
 
 const ReelsList = ({reels}) => {
   const [allReels, setAllReels] = useState([]);
@@ -267,20 +268,36 @@ const ReelsList = ({reels}) => {
                   {product.stock ? "В наявності" : "Немає в наявності"}
                 </p>
               </Link>
-              <div className={styles.reels__price__container}>
-                <p className={styles.reels__price}>
-                  Ціна:
-                  {parseFloat(product.price) *
-                    process.env.NEXT_PUBLIC_EXCHANGE}{" "}
-                  грн
-                </p>
+              <div className={styles.price__container}>
+                <ul className={styles.prices__list}>
+                  <li>
+                    <p
+                      className={`${styles.reels__price} ${
+                        process.env.NEXT_PUBLIC_SALE_MODE === "true"
+                          ? styles.sale
+                          : ""
+                      }`}
+                    >
+                      {`Ціна: ${calcMainPrice(product.price)} грн`}
+                    </p>
+                  </li>
+                  {process.env.NEXT_PUBLIC_SALE_MODE === "true" && (
+                    <li
+                      className={`${styles.reels__price} ${styles.reels__price__sale}`}
+                    >
+                      <p>{`Ціна: ${calcSalePrice(product.price)} грн`}</p>
+                    </li>
+                  )}
+                </ul>
+
                 {product.stock && (
                   <BuyButton
                     productId={product._id}
                     productName={`${product.name} ${product.brand} ${product.series} ${product.model}`}
                     productPrice={
-                      parseFloat(product.price) *
-                      process.env.NEXT_PUBLIC_EXCHANGE
+                      process.env.NEXT_PUBLIC_SALE_MODE === "true"
+                        ? calcSalePrice(product.price)
+                        : calcMainPrice(product.price)
                     }
                     productImg={product.img[0]}
                   />

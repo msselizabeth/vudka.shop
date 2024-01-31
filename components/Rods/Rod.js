@@ -1,3 +1,4 @@
+import { calcMainPrice, calcSalePrice } from "../../helpers/price-calc";
 import BuyButton from "../BuyButton/BuyButton";
 import { Carousel } from "../Carousel/Carousel";
 import styles from "./Rod.module.css";
@@ -5,33 +6,61 @@ import styles from "./Rod.module.css";
 const Rod = ({ rod }) => {
   return (
     <>
-      <h1 className={`title ${styles.rod__title}`}>{`${rod.name} ${rod.brand} ${
-        rod.series
-      } ${rod.model} ${rod.rodSize} ${
-        rod.testMin && `${rod.testMin}-${rod.testMax}г`
-      } `}</h1>
+      <h1 className={`title ${styles.rod__title}`}>
+        {`${rod.name} ${rod.brand} ${rod.series} ${rod.model} ${rod.rodSize} ${
+          rod.testMin && `${rod.testMin}-${rod.testMax}г`
+        } `}
+      </h1>
       <div className={styles.rod__style__box}>
         <Carousel images={rod.img} alt={rod.alt} />
         <div>
-          <div className={styles.priceBtn__container}>
+          <div className={styles.price__container}>
             <div>
-              <div className={styles.price__container}>
-                <h2 className={styles.price__title}>Ціна: </h2>
-                <p>
-                  {(
-                    parseFloat(rod.price) * process.env.NEXT_PUBLIC_EXCHANGE
-                  ).toFixed(2)}{" "}
-                  грн
-                </p>
-              </div>
+              <ul className={styles.prices__list}>
+                <li>
+                  <p
+                    className={`${styles.rod__price} ${
+                      process.env.NEXT_PUBLIC_SALE_MODE === "true"
+                        ? styles.sale
+                        : ""
+                    }`}
+                  >
+                    {`Ціна: ${calcMainPrice(rod.price)} грн`}
+                  </p>
+                </li>
+                {process.env.NEXT_PUBLIC_SALE_MODE === "true" && (
+                  <li>
+                    <p
+                      className={`${styles.rod__price} ${styles.rod__price__sale}`}
+                    >{`Ціна: ${calcSalePrice(rod.price)} грн`}</p>
+                  </li>
+                )}
+              </ul>
               {rod.stock ? (
-                <p className={styles.stock__text}>в наявності</p>
+                <p className={styles.stock__text}>{`в наявності`}</p>
               ) : (
-                <p className={styles.stock__text}>немає в наявності</p>
+                <p className={styles.stock__text}>{`немає в наявності`}</p>
               )}
             </div>
-            {rod.stock && <BuyButton />}
+
+            {rod.stock && (
+              <BuyButton
+                productId={rod._id}
+                productName={`${rod.name} ${rod.brand} ${rod.series} ${
+                  rod.model
+                } ${rod.rodSize}см ${
+                  rod.testMin && `${rod.testMin}-${rod.testMax}г`
+                }`}
+                productPrice={
+                  process.env.NEXT_PUBLIC_SALE_MODE === "true"
+                    ? calcSalePrice(rod.price)
+                    : calcMainPrice(rod.price)
+                }
+                productImg={rod.img[0]}
+              />
+            )}
           </div>
+
           <div className={styles.info__container}>
             <h2 className="title">Характеристики:</h2>
             <table className={styles.info__table}>

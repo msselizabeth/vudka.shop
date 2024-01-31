@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import styles from "./SiliconeModelSelector.module.css";
 import BuyButton from "../BuyButton/BuyButton";
 import Image from "next/image";
+import { calcMainPrice, calcSalePrice } from "../../helpers/price-calc";
+
 
 
 const SiliconeModelSelector = ({ models, silicone }) => {
@@ -89,14 +91,26 @@ const SiliconeModelSelector = ({ models, silicone }) => {
             <div className={styles.price__block}>
               <div>
                 <div className={styles.price__container}>
-                  <h3 className={styles.select__price__title}>Ціна: </h3>
-                  <p className={styles.select__price__value}>
-                    {(
-                      parseFloat(silicone.price) *
-                      process.env.NEXT_PUBLIC_EXCHANGE
-                    ).toFixed(2)}{" "}
+                  <p
+                    className={`${styles.silicones__price} ${
+                      process.env.NEXT_PUBLIC_SALE_MODE === "true"
+                        ? styles.sale
+                        : ""
+                    }`}
+                  >
+                    Ціна:{" "}
+                    {calcMainPrice(silicone.price)}{" "}
                     грн
                   </p>
+                  {process.env.NEXT_PUBLIC_SALE_MODE === "true" && (
+                    <p
+                      className={`${styles.silicones__price} ${styles.silicones__price__sale}`}
+                    >
+                      Ціна:{" "}
+                      {calcSalePrice(silicone.price)}
+                      грн
+                    </p>
+                  )}
                 </div>
                 {selectedModel.stock ? (
                   <p className={styles.select__stock__text}>в наявності</p>
@@ -106,13 +120,15 @@ const SiliconeModelSelector = ({ models, silicone }) => {
                   </p>
                 )}
               </div>
+
               {selectedModel.stock && (
                 <BuyButton
                   productId={selectedModel._id}
                   productName={`${silicone.name} ${silicone.brand} ${silicone.series} ${silicone.model}" ${selectedModel.color}`}
                   productPrice={
-                    parseFloat(silicone.price) *
-                    process.env.NEXT_PUBLIC_EXCHANGE
+                    process.env.NEXT_PUBLIC_SALE_MODE === "true"
+                      ? calcSalePrice(silicone.price) 
+                      : calcMainPrice(silicone.price) 
                   }
                   productImg={selectedModel.img}
                 />
