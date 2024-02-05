@@ -125,11 +125,7 @@ const SiliconeModelSelector = ({ models, silicone }) => {
                 <BuyButton
                   productId={selectedModel._id}
                   productName={`${silicone.name} ${silicone.brand} ${silicone.series} ${silicone.model}" ${selectedModel.color}`}
-                  productPrice={
-                    process.env.NEXT_PUBLIC_SALE_MODE === "true"
-                      ? calcSalePrice(silicone.price) 
-                      : calcMainPrice(silicone.price) 
-                  }
+                  productPrice={silicone.price}
                   productImg={selectedModel.img}
                 />
               )}

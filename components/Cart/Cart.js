@@ -1,10 +1,11 @@
-"use client"
+"use client";
 
 import axios from "axios";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import styles from "./Cart.module.css";
 import Link from "next/link";
+import { calcMainPrice, calcSalePrice } from "../../helpers/price-calc";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -21,20 +22,17 @@ const Cart = () => {
   const [isValidPhone, setIsValidPhone] = useState(true);
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [isOrderSuccess, setIsOrderSuccess] = useState(false);
-   const [isDataProcessingConfirmed, setIsDataProcessingConfirmed] =
-     useState(false);
-   const [dataProcessingError, setDataProcessingError] = useState("");
+  const [isConfirmed, setIsСonfirmed] =
+    useState(false);
+  const [dataProcessingError, setDataProcessingError] = useState("");
 
-   const handleDataProcessingConfirmation = () => {
-     setIsDataProcessingConfirmed(!isDataProcessingConfirmed);
-     setDataProcessingError(""); // Очищаємо текст помилки при зміні стану чекбокса
-   };
-  
+  const handleConfirmation = () => {
+    setIsСonfirmed(!isConfirmed);
+    setDataProcessingError(""); 
+  };
+
   useEffect(() => {
-    // Получение текущего состояния корзины из localStorage
     const currentCart = JSON.parse(localStorage.getItem("cart")) || {};
-
-    // Преобразование объекта корзины в массив для удобства отображения
     const itemsArray = Object.keys(currentCart).map((productId) => ({
       productId,
       ...currentCart[productId],
@@ -42,13 +40,6 @@ const Cart = () => {
 
     setCartItems(itemsArray);
   }, []);
-
-  const calculateTotal = () => {
-    return cartItems.reduce(
-      (total, item) => total + item.productPrice * item.quantity,
-      0
-    ).toFixed(2);
-  };
 
   const removeFromCart = (productId) => {
     // Получение текущего состояния корзины из localStorage
@@ -93,94 +84,105 @@ const Cart = () => {
   };
 
   const validatePhoneNumber = (phoneNumber) => {
-    // Регулярное выражение для валидации номера телефона
     const phoneRegExp =
       /^(?:\+38)?(?:\(\d{3}\)|\d{3})(?:[ -]?)\d{2,3}(?:[ -]?)\d{2}(?:[ -]?)\d{2}$/;
     return phoneRegExp.test(phoneNumber);
   };
 
   const validateEmail = (email) => {
-    // Регулярное выражение для валидации email
     const emailRegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegExp.test(email);
   };
 
-   const handleSubmitOrder = async (e) => {
-     e.preventDefault();
-      if (!isDataProcessingConfirmed) {
-        // Якщо чекбокс не відзначено, встановлюємо текст помилки
-        setDataProcessingError("Підтвердіть обробку персональних даних!");
-        return;
+  const handleSubmitOrder = async (e) => {
+    e.preventDefault();
+    if (!isConfirmed) {
+      setDataProcessingError("Підтвердіть обробку персональних даних!");
+      return;
+    }
+
+    const isValidPhone = validatePhoneNumber(formData.phoneNumber);
+    const isValidEmail = validateEmail(formData.email);
+
+    setIsValidPhone(isValidPhone);
+    setIsValidEmail(isValidEmail);
+
+    if (isValidPhone && isValidEmail) {
+
+      const orderData = {
+        products: cartItems.map((item) => ({
+          _id: item.productId,
+          prodName: item.productName,
+          quantity: item.quantity,
+          prodPrice: item.productPrice,
+        })),
+        orderSum: calculateTotal(),
+        destination: {
+          clientName: formData.firstName,
+          clientSurname: formData.lastName,
+          clientPhone: formData.phoneNumber,
+          clientEmail: formData.email,
+          oblast: formData.region,
+          city: formData.locality,
+          numberOfPost: formData.postOffice,
+          comment: formData.comment,
+        },
+      };
+
+      try {
+        // Отправка POST-запроса на сервер
+        const response = await axios.post(
+          `${process.env.NEXT_PUBLIC_API_URL}/cart/addOrder`,
+          orderData
+        );
+
+        // Очистка формы после успешной отправки заказа
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phoneNumber: "",
+          region: "",
+          locality: "",
+          postOffice: "",
+          comment: "",
+        });
+
+        localStorage.removeItem("cart");
+        setCartItems([]);
+        setIsOrderSuccess(true);
+      } catch (error) {
+        console.error("Помилка при відправленні:", error);
       }
-     // Валидация номера телефона и почтового адреса
-     const isValidPhone = validatePhoneNumber(formData.phoneNumber);
-     const isValidEmail = validateEmail(formData.email);
+    }
+  };
 
-     setIsValidPhone(isValidPhone);
-     setIsValidEmail(isValidEmail);
-
-     // Если данные валидны, можно отправить заказ на сервер
-     if (isValidPhone && isValidEmail) {
-       // Подготовка данных заказа для отправки
-       const orderData = {
-         products: cartItems.map((item) => ({
-           _id: item.productId,
-           prodName: item.productName,
-           quantity: item.quantity,
-           prodPrice: item.productPrice,
-         })),
-         orderSum: calculateTotal(),
-         destination: {
-           clientName: formData.firstName,
-           clientSurname: formData.lastName,
-           clientPhone: formData.phoneNumber,
-           clientEmail: formData.email,
-           oblast: formData.region,
-           city: formData.locality,
-           numberOfPost: formData.postOffice,
-           comment: formData.comment,
-         },
-       };
-
-       try {
-         // Отправка POST-запроса на сервер
-         const response = await axios.post(
-           `${process.env.NEXT_PUBLIC_API_URL}/cart/addOrder`,
-           orderData
-         );
-
-         // Очистка формы после успешной отправки заказа
-         setFormData({
-           firstName: "",
-           lastName: "",
-           email: "",
-           phoneNumber: "",
-           region: "",
-           locality: "",
-           postOffice: "",
-           comment: "",
-         });
-
-         localStorage.removeItem("cart");
-         setCartItems([]);
-         setIsOrderSuccess(true);
-        
-       } catch (error) {
-         console.error("Помилка при відправленні:", error);
-       }
-     }
-   };
-  
   const handleCloseModal = () => {
-    // Закриваємо вспливаюче вікно
     setIsOrderSuccess(false);
   };
 
-  
+  function calculateTotal() {
+    return cartItems
+      .reduce(
+        (total, item) =>
+          total + currentPrice(item.productPrice) * item.quantity,
+        0
+      )
+      .toFixed(2);
+  }
+
+  function currentPrice(price) {
+    const currentPriceValue =
+      process.env.NEXT_PUBLIC_SALE_MODE === "true"
+        ? calcSalePrice(price)
+        : calcMainPrice(price);
+
+    return currentPriceValue.toFixed(2);
+  }
 
   return (
     <div>
-      <h1 className="title">Корзина замовлення</h1>
+      <h1 className="title">Кошик замовлення</h1>
       {cartItems.length === 0 ? (
         <p style={{ textAlign: "center" }}>Ви ще не обрали жодного товару.</p>
       ) : (
@@ -197,7 +199,8 @@ const Cart = () => {
                 />
                 <div className={styles.cart__products__info__box}>
                   <p>
-                    {item.productName} - {(item.productPrice).toFixed(2)} грн.
+                    {item.productName} - {currentPrice(item.productPrice)}
+                    грн.
                   </p>
                   <p className={styles.cart__products__qnt}>
                     Кількість:
@@ -230,7 +233,11 @@ const Cart = () => {
                     </button>
                   </p>
                   <p className={styles.cart__products__totalProdPrice}>
-                    Всього: {(item.productPrice * item.quantity).toFixed(2)} грн.
+                    Всього:
+                    {(currentPrice(item.productPrice) * item.quantity).toFixed(
+                      2
+                    )}{" "}
+                    грн.
                     <button
                       onClick={() => removeFromCart(item.productId)}
                       className={styles.cart__products__delete__btn}
@@ -387,14 +394,15 @@ const Cart = () => {
             <label className={styles.cart__label__confirm}>
               <input
                 type="checkbox"
-                checked={isDataProcessingConfirmed}
-                onChange={handleDataProcessingConfirmation}
+                checked={isConfirmed}
+                onChange={handleConfirmation}
               />
               <p>
                 Підтверджую обробку персональних даних та
                 <Link href="/" className={styles.confirm__link}>
                   умови користування
-                </Link>.
+                </Link>
+                .
               </p>
             </label>
             {dataProcessingError && (

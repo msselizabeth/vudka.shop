@@ -256,3 +256,12 @@
        
       
 }
+
+@media screen and (min-width:1024px) {
+    .mob__menu__btn {
+           display: none;
+        }
+    .mob__menu__overlay{
+        display: none;
+    }
+}
