@@ -1,3 +1,7 @@
+import DevelopContent from "../../../components/DevelopContent.js/DevelopContent";
+
 export default function Sale() {
-  return <div className="container">SALE</div>;
+  return (
+   <DevelopContent />
+  );
 }

@@ -1,3 +1,5 @@
+import DevelopContent from "../../../components/DevelopContent.js/DevelopContent";
+
 export default function Gallery() {
-  return <div className="container">Photos</div>;
+  return <DevelopContent />;
 }

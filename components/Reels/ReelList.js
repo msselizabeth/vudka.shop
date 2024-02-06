@@ -1,15 +1,15 @@
-"use client"
-import { useState, useEffect } from 'react';
-import MobileFiltersContainer from '../Filters/MobileFiltersContainer';
-import Filters from '../Filters/Filters';
-import ButtonMore from '../ButtonMore/ButtonMore';
+"use client";
+import { useState, useEffect } from "react";
+import MobileFiltersContainer from "../Filters/MobileFiltersContainer";
+import Filters from "../Filters/Filters";
+import ButtonMore from "../ButtonMore/ButtonMore";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./ReelList.module.css";
-import BuyButton from '../BuyButton/BuyButton';
-import { calcMainPrice, calcSalePrice } from '../../helpers/price-calc';
+import BuyButton from "../BuyButton/BuyButton";
+import { calcMainPrice, calcSalePrice } from "../../helpers/price-calc";
 
-const ReelsList = ({reels}) => {
+const ReelsList = ({ reels }) => {
   const [allReels, setAllReels] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(10);
@@ -99,17 +99,17 @@ const ReelsList = ({reels}) => {
     .filter(
       (reel) =>
         (filters.typereel.length === 0 ||
-          filters.series.includes(reel.typereel)) &&
+          filters.typereel.includes(reel.typereel)) &&
         (filters.brand.length === 0 || filters.brand.includes(reel.brand)) &&
         (filters.series.length === 0 || filters.series.includes(reel.series)) &&
         (filters.spoolSize.length === 0 ||
-          filters.series.includes(reel.spoolSize)) &&
+          filters.spoolSize.includes(reel.spoolSize)) &&
         (filters.dragMax.length === 0 ||
-          filters.series.includes(reel.dragMax)) &&
+          filters.dragMax.includes(reel.dragMax)) &&
         (filters.dragSys.length === 0 ||
-          filters.series.includes(reel.dragSys)) &&
+          filters.dragSys.includes(reel.dragSys)) &&
         (filters.ballBearing.length === 0 ||
-          filters.series.includes(reel.ballBearing))
+          filters.ballBearing.includes(reel.ballBearing))
     )
     .sort((a, b) => {
       const brandComparison = a.brand.localeCompare(b.brand);
@@ -322,4 +322,3 @@ const ReelsList = ({reels}) => {
 };
 
 export default ReelsList;
-

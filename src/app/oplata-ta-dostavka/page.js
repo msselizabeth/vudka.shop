@@ -1,3 +1,5 @@
+import DevelopContent from "../../../components/DevelopContent.js/DevelopContent";
+
 export default function OplataDostavka() {
-  return <div className="container">PAYMENT AND DELIVERY</div>;
+  return <DevelopContent/>;
 }

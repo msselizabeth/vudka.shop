@@ -1,3 +1,5 @@
+import DevelopContent from "../../../components/DevelopContent.js/DevelopContent";
+
 export default function Odyah() {
-  return <div className="container">Одяг</div>;
+  return <DevelopContent/>;
 }

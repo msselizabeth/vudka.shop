@@ -1,3 +1,5 @@
+import DevelopContent from "../../../components/DevelopContent.js/DevelopContent";
+
 export default function Contacts() {
-  return <div className="container">CONTACTS</div>;
+  return <DevelopContent />;
 }
