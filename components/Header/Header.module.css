@@ -1,8 +1,8 @@
 .header__container {
+    position: relative;
     background: var(--header-gradient);
     width: 100%;
     height: 100px;
-
 }
 
 .main__nav {
@@ -30,6 +30,59 @@
 .logo__text:focus {
     color: var(--icons-color-hover);
 }
+.nav__list, .cart__link{
+    display: none;
+}
+
+/* styles info part {paymets, delivery, sales}*/
+   .info__container {
+       display: none;
+       position: absolute;
+       top: 7px;
+       left: 150px;
+
+   }
+   .info__list {
+       display: flex;
+       align-items: center;
+       gap: 15px;
+   }
+   .info__link{
+        font-weight: 200;
+        font-size: 15px;
+        color: var(--primary-links-color);
+        transition: var(--transition);
+   }
+   .info__link:hover, .info__link:focus{
+     color: var(--icons-color-hover);
+   }
+
+   /* styles contact part {tel, mail}*/
+   .contact__container {
+       display: none;
+       position: absolute;
+       top: 7px;
+       right: 20px;
+
+   }
+
+   .contact__list {
+       display: flex;
+       align-items: center;
+       gap: 15px;
+   }
+
+   .contact__link {
+       font-weight: 200;
+       font-size: 15px;
+       color: var(--primary-links-color);
+       transition: var(--transition);
+   }
+
+   .contact__link:hover,
+   .contact__link:focus {
+       color: var(--icons-color-hover);
+   }
 
 
 @media screen and (min-width:425px) {
@@ -84,10 +137,7 @@
 
     .main__nav {
         width: 974px;
-
-
         margin: 0 auto;
-
     }
 
     .logo__text {
@@ -104,6 +154,8 @@
     }
 
     .cart__link {
+        position: relative;
+        display: block;
         color: var(--icons-color);
         transition: var(--transition);
     }
@@ -160,6 +212,11 @@
     .dropdown:hover .dropdown__content {
         display: block;
     }
+
+    .info__container, .contact__container {
+        display: block;
+    }
+ 
 }
 
 @media screen and (min-width:1440px) {
@@ -189,5 +246,29 @@
       font-size: 20px;
        font-weight: 500;
     }
+
+        .info__container {
+            left: 23%;
+
+        }
+        .info__list {
+            gap: 20px;
+        }
+        .info__link{
+            font-size: 16px;
+        }
+
+                .contact__container {
+                    right: 15%;
+                
+                }
+        
+                .contact__list {
+                    gap: 20px;
+                }
+        
+                .contact__link {
+                    font-size: 16px;
+                }
 
 }

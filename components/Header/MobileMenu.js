@@ -14,6 +14,7 @@ import { MailIcon } from "../icons/MailIcon";
 import { PhoneIcon } from "../icons/PhoneIcon";
 import { FacebookIcon } from "../icons/FacebookIcon";
 import { InstaIcon } from "../icons/InstaIcon";
+import { CartIcon } from "../icons/CartIcon";
 
 
 export const MobileMenu = () => {
@@ -83,13 +84,22 @@ export const MobileMenu = () => {
             >
               <MobMenuCloseIcon />
             </button>
-            <Link
-              href="/"
-              className={styles.mob__home__link}
-              onClick={toggleMenu}
-            >
-              <HomeIcon />
-            </Link>
+            <div className={styles.mob__icons__container}>
+              <Link
+                href="/"
+                className={styles.mob__home__link}
+                onClick={toggleMenu}
+              >
+                <HomeIcon />
+              </Link>
+              <Link
+                href="/cart"
+                className={styles.mob__cart__link}
+                onClick={toggleMenu}
+              >
+                <CartIcon />
+              </Link>
+            </div>
             <ul className={styles.mob__list}>
               <li>
                 <div className={styles.mob__item__cont}>
@@ -219,25 +229,6 @@ export const MobileMenu = () => {
                     <MobInnerMenuIcon />
                   </button>
                 </div>
-                {/* <ul
-                  className={`${styles.mob__inner__list} ${
-                    innerMenuStates.rybalskiSnasti ? styles.active : ""
-                  }`}
-                >
-                  {rybalskiSnastiMenu.map(({ id, path, name }) => {
-                    return (
-                      <li key={id} className={styles.mob__inner__item}>
-                        <Link
-                          href={path}
-                          className={styles.mob__link}
-                          onClick={toggleMenu}
-                        >
-                          {name}
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul> */}
               </li>
               <li>
                 <div className={styles.mob__item__cont}>
@@ -256,25 +247,6 @@ export const MobileMenu = () => {
                     <MobInnerMenuIcon />
                   </button>
                 </div>
-                {/* <ul
-                  className={`${styles.mob__inner__list} ${
-                    innerMenuStates.rybalskiSnasti ? styles.active : ""
-                  }`}
-                >
-                  {rybalskiSnastiMenu.map(({ id, path, name }) => {
-                    return (
-                      <li key={id} className={styles.mob__inner__item}>
-                        <Link
-                          href={path}
-                          className={styles.mob__link}
-                          onClick={toggleMenu}
-                        >
-                          {name}
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul> */}
               </li>
               <li>
                 <div className={styles.mob__item__cont}>
@@ -293,27 +265,9 @@ export const MobileMenu = () => {
                     <MobInnerMenuIcon />
                   </button>
                 </div>
-                {/* <ul
-                  className={`${styles.mob__inner__list} ${
-                    innerMenuStates.rybalskiSnasti ? styles.active : ""
-                  }`}
-                >
-                  {rybalskiSnastiMenu.map(({ id, path, name }) => {
-                    return (
-                      <li key={id} className={styles.mob__inner__item}>
-                        <Link
-                          href={path}
-                          className={styles.mob__link}
-                          onClick={toggleMenu}
-                        >
-                          {name}
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul> */}
               </li>
             </ul>
+
             <div className={styles.contacts__container}>
               <p className={styles.contacts__text}>Контакти:</p>
               <ul className={styles.contacts__list}>
@@ -355,6 +309,30 @@ export const MobileMenu = () => {
                     className={styles.social__link}
                   >
                     <FacebookIcon />
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div className={styles.info__container}>
+              <ul className={styles.info__list}>
+                <li>
+                  <Link href={"/sale"} className={styles.info__link}>
+                    Акції
+                  </Link>
+                </li>
+                <li>
+                  <Link href={"/oplata-ta-dostavka"} className={styles.info__link}>
+                    Оплата та доставка
+                  </Link>
+                </li>
+                <li>
+                  <Link href={"/contacts"} className={styles.info__link}>
+                    Контакти
+                  </Link>
+                </li>
+                <li>
+                  <Link href={"/gallery"} className={styles.info__link}>
+                    Фото
                   </Link>
                 </li>
               </ul>

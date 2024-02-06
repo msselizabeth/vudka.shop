@@ -1,0 +1,242 @@
+.footer__container{
+    background: var(--footer-gradient);
+    color: var(--primary-links-color);
+    font-weight: 300;
+    font-size: 14px;
+    width: 100%;
+}
+
+.logo__link {
+    position: relative;
+    display: block;
+}
+
+.logo__text {
+    position: absolute;
+    top: 60px;
+    left: 70px;
+    font-size: 16px;
+    color: var(--primary-links-color);
+    font-family: var(--font-rubik);
+    transition: var(--transition);
+}
+
+.logo__text:hover,
+.logo__text:focus {
+    color: var(--icons-color-hover);
+}
+.nav__container , .info__container  {
+    padding-top: 10px;
+}
+.nav__title, .info__title , .contacts__title, .social__title{ 
+    text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+}
+.nav__list{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    row-gap: 5px;
+    column-gap: 10px;
+    padding: 5px;
+}
+.nav__link {
+    transition: var(--transition);
+}
+
+.nav__link:hover,
+.nav__link:focus {
+    color: var(--icons-color-hover);
+}
+
+.info__list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    row-gap: 5px;
+    column-gap: 10px;
+    padding: 5px;
+}
+.info__link{
+    transition: var(--transition);
+}
+.info__link:hover,
+.info__link:focus {
+    color: var(--icons-color-hover);
+}
+.contacts__style__box{
+    display: flex;
+    justify-content: space-between;
+  padding-top: 10px;
+}
+.contacts__list, .social__list{
+    padding: 5px;
+}
+.contacts__list{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.contacts__link{
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    transition: var(--transition);
+}
+.contacts__link:hover,
+.contacts__link:focus {
+    color: var(--icons-color-hover);
+}
+.social__list{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.social__link{
+    transition: var(--transition);
+}
+.social__link:hover,
+.social__link:focus {
+    color: var(--icons-color-hover);
+}
+
+.cart__link{
+    transition: var(--transition);
+}
+.cart__link:hover,
+.cart__link:focus {
+    color: var(--icons-color-hover);
+}
+
+.footer__end{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+@media screen and (min-width:768px) {
+    .footer__container {
+            font-size: 16px;
+        }
+    .navInfo__box{
+        display: flex;
+        justify-content: center;
+    }
+    .nav__container, .info__container{
+        width: 374px;
+    }
+        .nav__title,
+        .info__title,
+        .contacts__title,
+        .social__title {
+            font-size: 17px;
+        }
+    .contacts__style__box{
+        justify-content: start;
+    }
+        .contacts__link {
+            gap: 5px;
+        }
+         .footer__end{
+            justify-content: start;
+            gap: 130px;
+         }
+
+         .contactSocialLogo__box{
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: center;
+            gap: 60px;
+            align-items: center;
+     
+         }
+}
+
+@media screen and (min-width:1024px) {
+    .footer__container {
+        font-size: 17px;
+    }
+
+    .navInfo__box {
+       gap: 30px;
+    }
+
+    .nav__container,
+    .info__container {
+        width: 497px;
+    }
+
+    .nav__title,
+    .info__title,
+    .contacts__title,
+    .social__title {
+        font-size: 18px;
+    }
+
+
+    .contacts__link {
+        gap: 7px;
+    }
+  .contacts__style__box{
+    gap: 50px;
+  }
+    .footer__end {
+        gap: 160px;
+    }
+
+    .contactSocialLogo__box {
+        gap: 90px;
+
+    }
+}
+
+@media screen and (min-width:1440px) {
+    .footer__container {
+        font-size: 18px;
+    }
+
+    .navInfo__box {
+        gap: 20px;
+    }
+
+    .nav__container,
+    .info__container {
+        width: 650px;
+    }
+
+    .nav__title,
+    .info__title,
+    .contacts__title,
+    .social__title {
+        font-size: 19px;
+    }
+
+
+    .contacts__link {
+        gap: 10px;
+    }
+
+    .contacts__style__box {
+        gap: 170px;
+    }
+
+    .footer__end {
+        gap: 180px;
+    }
+
+    .contactSocialLogo__box {
+        gap: 150px;
+
+    }
+        .logo__text {
+            left: 90px;
+            font-size: 19px;
+        }
+        .logo__img{
+            width: 100px;
+            height: 100px;
+        }
+}

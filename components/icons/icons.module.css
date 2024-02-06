@@ -1,4 +1,4 @@
-.home__icon {
+.home__icon, .cart__icon {
     width: 35px;
     height: 35px;
     transition: fill 0.5s ease;
@@ -8,13 +8,21 @@
 .mail__icon, .phone__icon {
     width: 20px;
     height: 20px;
+    transition: fill 0.5s ease;
     fill: currentColor;
 }
 .fb__icon,
-.insta__icon, .cart__icon{
+.insta__icon{
     width: 25px;
         height: 25px;
+        transition: fill 0.5s ease;
         fill: currentColor;
+}
+.cart__icon{
+    width: 30px;
+    height: 30px;
+    transition: fill 0.5s ease;
+    fill: currentColor;
 }
 
 @media screen and (min-width:1440px) {

@@ -1,6 +1,7 @@
 import { Rubik_Mono_One, Roboto} from "next/font/google";
 import "./globals.css";
 import { Header } from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 
 const roboto= Roboto({
   subsets: ["latin"],
@@ -29,7 +30,9 @@ export default function RootLayout({ children }) {
           <Header />
         </header>
         <main>{children}</main>
-        <footer></footer>
+        <footer>
+          <Footer />
+        </footer>
       </body>
     </html>
   );
