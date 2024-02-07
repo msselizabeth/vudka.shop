@@ -1,7 +1,10 @@
 import SiliconProduct from "../../../../../components/Silicones/Silicone";
 
 async function getData(id) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/silicones/${id}`);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/silicones/${id}`,
+    { next: { revalidate: 3600 } }
+  );
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }

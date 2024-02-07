@@ -2,7 +2,8 @@ import ReelsList from "../../../../../components/Reels/ReelList";
 
 async function getData() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/reels?query=carp`
+    `${process.env.NEXT_PUBLIC_API_URL}/reels?query=carp`,
+    { next: { revalidate: 3600 } }
   );
   if (!res.ok) {
     throw new Error("Failed to fetch data");
