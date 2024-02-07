@@ -17,8 +17,8 @@ export const Carousel = ({ images, alt }) => {
         <Image
           src={images[currentImage]}
           alt={alt}
-          width={200}
-          height={200}
+          width={1000}
+          height={1000}
           className={styles.main__image}
         />
       
