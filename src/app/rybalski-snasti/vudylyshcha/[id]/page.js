@@ -3,9 +3,9 @@ import TheSameRodsList from "../../../../../components/Rods/TheSameRods";
 
 
 async function getData(id) {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/rods/${id}`
-  );
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/rods/${id}`, {
+    next: { revalidate: 3600 },
+  });
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
@@ -15,7 +15,10 @@ async function getData(id) {
 }
 async function getSameData(series) {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/rods/same?query=${series}`
+    `${process.env.NEXT_PUBLIC_API_URL}/rods/same?query=${series}`,
+    {
+      next: { revalidate: 3600 },
+    }
   );
   if (!res.ok) {
     throw new Error("Failed to fetch data");
