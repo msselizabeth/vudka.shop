@@ -53,8 +53,8 @@ const SiliconeModelSelector = ({ models, silicone }) => {
                   <Image
                     src={model.img}
                     alt={silicone.alt}
-                    width={30}
-                    height={30}
+                    width={700}
+                    height={700}
                     className={styles.selector__inner__img}
                   />
                   {model.colorNumber}
@@ -78,8 +78,8 @@ const SiliconeModelSelector = ({ models, silicone }) => {
           <Image
             src={selectedModel.img}
             alt={silicone.alt}
-            width={300}
-            height={300}
+            width={700}
+            height={700}
             priority={true}
             className={styles.selector__img}
           />
