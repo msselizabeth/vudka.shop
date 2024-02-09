@@ -1,9 +1,9 @@
 export const osnashchennyaMenu = [
-  // {
-  //   id: 1,
-  //   path: "/osnashchennya/hachky",
-  //   name: "Гачки",
-  // },
+  {
+    id: 1,
+    path: "/osnashchennya/hachky",
+    name: "Гачки",
+  },
   // {
   //   id: 2,
   //   path: "/osnashchennya/hruzyla",

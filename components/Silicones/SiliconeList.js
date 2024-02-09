@@ -8,6 +8,7 @@ import MobileFiltersContainer from "../Filters/MobileFiltersContainer";
 import BuyButton from "../BuyButton/BuyButton";
 import ButtonMore from "../ButtonMore/ButtonMore";
 import { calcMainPrice, calcSalePrice } from "../../helpers/price-calc";
+import NoProductsFound from "../NoProductsFound/NoProductsFound";
 
 const SiliconesList = ({ silicones }) => {
     const [allSilicones, setAllSelicones] = useState([]);
@@ -256,10 +257,7 @@ const SiliconesList = ({ silicones }) => {
             ))}
           </ul>
           {currentProducts.length === 0 && (
-            <p className={styles.silicones__none}>
-              Вибачте, але товарів за обраними фільтрами не знайдено. Спробуйте
-              змінити запит.
-            </p>
+           <NoProductsFound />
           )}
 
           {currentPage !== totalPages && currentPage < totalPages && (

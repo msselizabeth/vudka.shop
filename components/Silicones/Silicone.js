@@ -1,4 +1,3 @@
-import { Carousel } from "../Carousel/Carousel";
 import SiliconeModelSelector from "./SiliconeModelSelector";
 
 import styles from "./Silicone.module.css";
