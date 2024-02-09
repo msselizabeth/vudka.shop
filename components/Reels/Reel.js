@@ -3,7 +3,7 @@ import { Carousel } from "../Carousel/Carousel";
 import styles from "./Reel.module.css";
 import { calcMainPrice, calcSalePrice } from "../../helpers/price-calc";
 
- const Reel = ({ reel }) => {
+const Reel = ({ reel }) => {
   return (
     <>
       <h1
@@ -64,10 +64,12 @@ import { calcMainPrice, calcSalePrice } from "../../helpers/price-calc";
                   <td className={styles.td}>{reel.item}</td>
                 </tr>
 
-                <tr>
-                  <th className={styles.th}>Розмір шпулі:</th>
-                  <td className={styles.td}>{reel.spoolSize}</td>
-                </tr>
+                {reel.spoolSize && (
+                  <tr>
+                    <th className={styles.th}>Розмір шпулі:</th>
+                    <td className={styles.td}>{reel.spoolSize}</td>
+                  </tr>
+                )}
 
                 <tr>
                   <th className={styles.th}>Жилкомісткість:</th>
@@ -95,10 +97,12 @@ import { calcMainPrice, calcSalePrice } from "../../helpers/price-calc";
                   <th className={styles.th}>Фрікціон:</th>
                   <td className={styles.td}>{reel.dragSys}</td>
                 </tr>
-                <tr>
-                  <th className={styles.th}>Гальма:</th>
-                  <td className={styles.td}>{reel.brakeSys}</td>
-                </tr>
+                {reel.brakeSys && (
+                  <tr>
+                    <th className={styles.th}>Гальма:</th>
+                    <td className={styles.td}>{reel.brakeSys}</td>
+                  </tr>
+                )}
                 <tr>
                   <th className={styles.th}>Ручка котушки:</th>
                   <td className={styles.td}>{reel.handle}</td>
@@ -121,7 +125,7 @@ import { calcMainPrice, calcSalePrice } from "../../helpers/price-calc";
         </div>
       </div>
       <div className={styles.description__container}>
-        <h2 className="title">{`Опис вудилища ${reel.brand} ${reel.series} ${reel.model}:`}</h2>
+        <h2 className="title">{`Опис котушки ${reel.brand} ${reel.series} ${reel.model}:`}</h2>
         <ul className={styles.description__list}>
           {reel.description.map((item, index) => (
             <li key={index}>

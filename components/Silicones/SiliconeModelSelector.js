@@ -5,8 +5,6 @@ import BuyButton from "../BuyButton/BuyButton";
 import Image from "next/image";
 import { calcMainPrice, calcSalePrice } from "../../helpers/price-calc";
 
-
-
 const SiliconeModelSelector = ({ models, silicone }) => {
   const [selectedModel, setSelectedModel] = useState(models[0]);
 
@@ -15,7 +13,7 @@ const SiliconeModelSelector = ({ models, silicone }) => {
   const handleToggleList = () => {
     setIsListOpen(!isListOpen);
   };
-  const shouldShowButton = models.length > 15; 
+  const shouldShowButton = models.length > 15;
 
   const handleModelChange = (model) => {
     setSelectedModel(model);
@@ -98,16 +96,13 @@ const SiliconeModelSelector = ({ models, silicone }) => {
                         : ""
                     }`}
                   >
-                    Ціна:{" "}
-                    {calcMainPrice(silicone.price)}{" "}
-                    грн
+                    Ціна: {calcMainPrice(silicone.price)} грн
                   </p>
                   {process.env.NEXT_PUBLIC_SALE_MODE === "true" && (
                     <p
                       className={`${styles.silicones__price} ${styles.silicones__price__sale}`}
                     >
-                      Ціна:{" "}
-                      {calcSalePrice(silicone.price)}
+                      Ціна: {calcSalePrice(silicone.price)}
                       грн
                     </p>
                   )}
@@ -131,29 +126,36 @@ const SiliconeModelSelector = ({ models, silicone }) => {
               )}
             </div>
 
-            <h4 className={styles.select__info__title}>Характеристики:</h4>
-            <ul className={styles.select__info__list}>
-              <li className={styles.select__info__item}>
-                <h4>Артикул:</h4>
-                <p>{selectedModel.item}</p>
-              </li>
-              <li className={styles.select__info__item}>
-                <h4>Колір: </h4>
-                <p>{selectedModel.color}</p>
-              </li>
-              <li className={styles.select__info__item}>
-                <h4>Розмір(дюйм):</h4>
-                <p>{silicone.model}</p>
-              </li>
-              <li className={styles.select__info__item}>
-                <h4>Розмір(мм):</h4>
-                <p>{silicone.size}</p>
-              </li>
-              <li className={styles.select__info__item}>
-                <h4>Вага(г):</h4>
-                <p>{silicone.weight}</p>
-              </li>
-            </ul>
+            <div className={styles.info__container}>
+              <h4 className={`title`}>Характеристики:</h4>
+              <table className={styles.info__table}>
+                <tbody>
+                  <tr>
+                    <th className={styles.th}>Артикль:</th>
+                    <td className={styles.td}>{selectedModel.item}</td>
+                  </tr>
+                  <tr>
+                    <th className={styles.th}>Колір:</th>
+                    <td className={styles.td}>{selectedModel.color}</td>
+                  </tr>
+                  <tr>
+                    <th className={styles.th}>Розмір(дюйм):</th>
+                    <td className={styles.td}>{silicone.model}</td>
+                  </tr>
+                  <tr>
+                    <th className={styles.th}>Розмір(мм):</th>
+                    <td className={styles.td}>{silicone.model}</td>
+                  </tr>
+
+                  <tr>
+                    <th className={`${styles.th} ${styles.last}`}>Вага(г):</th>
+                    <td className={`${styles.td} ${styles.last}`}>
+                      {silicone.weight}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
