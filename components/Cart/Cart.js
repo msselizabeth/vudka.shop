@@ -5,7 +5,11 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import styles from "./Cart.module.css";
 import Link from "next/link";
-import { calcMainPrice, calcSalePrice } from "../../helpers/price-calc";
+import {
+  calcMainPrice,
+  calcSalePrice,
+  calcAlwaysSalePrice,
+} from "../../helpers/price-calc";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -165,19 +169,23 @@ const Cart = () => {
     return cartItems
       .reduce(
         (total, item) =>
-          total + currentPrice(item.productPrice) * item.quantity,
+          total + currentPrice(item.productPrice, item.sale) * item.quantity,
         0
       )
       .toFixed(2);
   }
 
-  function currentPrice(price) {
-    const currentPriceValue =
-      process.env.NEXT_PUBLIC_SALE_MODE === "true"
-        ? calcSalePrice(price)
-        : calcMainPrice(price);
+  function currentPrice(price, sale) {
+    let currentPrice;
+    if (sale) {
+     return currentPrice = calcAlwaysSalePrice(price).toFixed(2);
+    }
+    if (process.env.NEXT_PUBLIC_SALE_MODE === "true" && !sale) {
+      return currentPrice = calcSalePrice(price).toFixed(2);
+    }
+    
+    return (currentPrice = calcMainPrice(price).toFixed(2));
 
-    return currentPriceValue.toFixed(2);
   }
 
   return (
@@ -199,7 +207,7 @@ const Cart = () => {
                 />
                 <div className={styles.cart__products__info__box}>
                   <p>
-                    {item.productName} - {currentPrice(item.productPrice)}
+                    {item.productName} - {currentPrice(item.productPrice, item.sale)}
                     грн.
                   </p>
                   <p className={styles.cart__products__qnt}>
@@ -234,7 +242,7 @@ const Cart = () => {
                   </p>
                   <p className={styles.cart__products__totalProdPrice}>
                     Всього:
-                    {(currentPrice(item.productPrice) * item.quantity).toFixed(
+                    {(currentPrice(item.productPrice, item.sale) * item.quantity).toFixed(
                       2
                     )}{" "}
                     грн.

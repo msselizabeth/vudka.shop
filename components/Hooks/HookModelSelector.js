@@ -3,7 +3,11 @@ import Image from "next/image";
 import BuyButton from "../BuyButton/BuyButton";
 import styles from "./HookModelSelector.module.css";
 import { useState } from "react";
-import { calcMainPrice, calcSalePrice } from "../../helpers/price-calc";
+import {
+  calcMainPrice,
+  calcSalePrice,
+  calcAlwaysSalePrice,
+} from "../../helpers/price-calc";
 
 const HookModelSelector = ({ models, hook }) => {
   const [selectedModel, setSelectedModel] = useState(models[0]);
@@ -17,7 +21,7 @@ const HookModelSelector = ({ models, hook }) => {
         <div>
           <ul className={`${styles.select__btns__list}`}>
             {models.map((model, index) => (
-              <li key={index} className={styles.selector__item}>
+              <li key={model._id} className={styles.selector__item}>
                 <button
                   onClick={() => handleModelChange(model)}
                   className={styles.hook__selector__btn}
@@ -88,25 +92,40 @@ const HookModelSelector = ({ models, hook }) => {
 
             <div className={styles.price__block}>
               <div>
-                <div className={styles.price__container}>
-                  <p
-                    className={`${styles.hook__price} ${
-                      process.env.NEXT_PUBLIC_SALE_MODE === "true"
-                        ? styles.sale
-                        : ""
-                    }`}
-                  >
-                    Ціна: {calcMainPrice(selectedModel.price)} грн
-                  </p>
-                  {process.env.NEXT_PUBLIC_SALE_MODE === "true" && (
+                <ul className={styles.price__container}>
+                  <li>
                     <p
-                      className={`${styles.hook__price} ${styles.hook__price__sale}`}
+                      className={`${styles.hook__price} ${
+                        process.env.NEXT_PUBLIC_SALE_MODE === "true" ||
+                        hook.sale
+                          ? styles.sale
+                          : ""
+                      }`}
                     >
-                      Ціна: {calcSalePrice(selectedModel.price)}
-                      грн
+                      Ціна: {calcMainPrice(selectedModel.price)} грн
                     </p>
+                  </li>
+                  {process.env.NEXT_PUBLIC_SALE_MODE === "true" &&
+                    !hook.sale && (
+                      <li>
+                        <p
+                          className={`${styles.hook__price} ${styles.hook__price__sale}`}
+                        >
+                          Ціна: {calcSalePrice(selectedModel.price)}
+                          грн
+                        </p>
+                      </li>
+                    )}
+                  {hook.sale && (
+                    <li>
+                      <p
+                        className={`${styles.hook__price} ${styles.hook__price__sale}`}
+                      >{`Ціна: ${calcAlwaysSalePrice(
+                        selectedModel.salePrice
+                      )} грн`}</p>
+                    </li>
                   )}
-                </div>
+                </ul>
                 {selectedModel.stock ? (
                   <p className={styles.select__stock__text}>в наявності</p>
                 ) : (
@@ -118,10 +137,13 @@ const HookModelSelector = ({ models, hook }) => {
 
               {selectedModel.stock && (
                 <BuyButton
+                  sale={hook.sale}
                   productId={selectedModel._id}
                   productName={`${hook.name} ${hook.brand} ${hook.series} ${selectedModel.number}`}
-                  productPrice={hook.price}
-                  productImg={hook.imgMsin}
+                  productPrice={
+                    hook.sale ? selectedModel.salePrice : selectedModel.price
+                  }
+                  productImg={hook.imgMain}
                 />
               )}
             </div>

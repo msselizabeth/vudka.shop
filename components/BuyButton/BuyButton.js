@@ -2,7 +2,7 @@
 import { useState } from "react";
 import styles from "./BuyButton.module.css";
 
-const BuyButton = ({ productId, productName, productPrice, productImg }) => {
+const BuyButton = ({ productId, productName, productPrice, productImg , sale}) => {
  
   const [quantity, setQuantity] = useState(1);
   const [isModalVisible, setModalVisible] = useState(false);
@@ -18,6 +18,7 @@ const BuyButton = ({ productId, productName, productPrice, productImg }) => {
        } else {
          // Если товара нет в корзине, добавляем новый элемент
          currentCart[productId] = {
+           sale,
            productImg,
            productName,
            productPrice,

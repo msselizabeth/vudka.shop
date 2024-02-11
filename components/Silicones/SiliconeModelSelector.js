@@ -3,7 +3,11 @@ import React, { useState } from "react";
 import styles from "./SiliconeModelSelector.module.css";
 import BuyButton from "../BuyButton/BuyButton";
 import Image from "next/image";
-import { calcMainPrice, calcSalePrice } from "../../helpers/price-calc";
+import {
+  calcMainPrice,
+  calcSalePrice,
+  calcAlwaysSalePrice,
+} from "../../helpers/price-calc";
 
 const SiliconeModelSelector = ({ models, silicone }) => {
   const [selectedModel, setSelectedModel] = useState(models[0]);
@@ -88,25 +92,41 @@ const SiliconeModelSelector = ({ models, silicone }) => {
 
             <div className={styles.price__block}>
               <div>
-                <div className={styles.price__container}>
-                  <p
-                    className={`${styles.silicones__price} ${
-                      process.env.NEXT_PUBLIC_SALE_MODE === "true"
-                        ? styles.sale
-                        : ""
-                    }`}
-                  >
-                    Ціна: {calcMainPrice(silicone.price)} грн
-                  </p>
-                  {process.env.NEXT_PUBLIC_SALE_MODE === "true" && (
+                <ul className={styles.price__container}>
+                  <li>
                     <p
-                      className={`${styles.silicones__price} ${styles.silicones__price__sale}`}
+                      className={`${styles.silicones__price} ${
+                        process.env.NEXT_PUBLIC_SALE_MODE === "true" ||
+                        silicone.sale
+                          ? styles.sale
+                          : ""
+                      }`}
                     >
-                      Ціна: {calcSalePrice(silicone.price)}
-                      грн
+                      Ціна: {calcMainPrice(silicone.price)} грн
                     </p>
+                  </li>
+                  {process.env.NEXT_PUBLIC_SALE_MODE === "true" &&
+                    !silicone.sale && (
+                      <li>
+                        <p
+                          className={`${styles.silicones__price} ${styles.silicones__price__sale}`}
+                        >
+                          Ціна: {calcSalePrice(silicone.price)}
+                          грн
+                        </p>
+                      </li>
+                    )}
+                  {silicone.sale && (
+                    <li>
+                      <p
+                        className={`${styles.silicones__price} ${styles.silicones__price__sale}`}
+                      >
+                        Ціна: {calcAlwaysSalePrice(silicone.salePriceMain)}
+                        грн
+                      </p>
+                    </li>
                   )}
-                </div>
+                </ul>
                 {selectedModel.stock ? (
                   <p className={styles.select__stock__text}>в наявності</p>
                 ) : (
@@ -118,9 +138,10 @@ const SiliconeModelSelector = ({ models, silicone }) => {
 
               {selectedModel.stock && (
                 <BuyButton
+                  sale={silicone.sale}
                   productId={selectedModel._id}
                   productName={`${silicone.name} ${silicone.brand} ${silicone.series} ${silicone.model}" ${selectedModel.color}`}
-                  productPrice={silicone.price}
+                  productPrice={silicone.sale ? silicone.salePriceMain : silicone.price}
                   productImg={selectedModel.img}
                 />
               )}
@@ -144,7 +165,7 @@ const SiliconeModelSelector = ({ models, silicone }) => {
                   </tr>
                   <tr>
                     <th className={styles.th}>Розмір(мм):</th>
-                    <td className={styles.td}>{silicone.model}</td>
+                    <td className={styles.td}>{silicone.size}</td>
                   </tr>
 
                   <tr>

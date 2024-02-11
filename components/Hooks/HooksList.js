@@ -6,7 +6,11 @@ import { useEffect, useState } from "react";
 import MobileFiltersContainer from "../Filters/MobileFiltersContainer";
 import Filters from "../Filters/Filters";
 import ButtonMore from "../ButtonMore/ButtonMore";
-import { calcMainPrice, calcSalePrice } from "../../helpers/price-calc";
+import {
+  calcMainPrice,
+  calcSalePrice,
+  calcAlwaysSalePrice,
+} from "../../helpers/price-calc";
 import NoProductsFound from "../NoProductsFound/NoProductsFound";
 
 const HooksList = ({ hooks }) => {
@@ -25,17 +29,26 @@ const HooksList = ({ hooks }) => {
   useEffect(() => {
     const uniqueTypehooks = [
       ...new Set(
-        hooks.map((hook) => hook.typehooks).sort((a, b) => a.localeCompare(b))
+        hooks
+          .filter((hook) => hook.render) // Отфильтровываем элементы по условию
+          .map((hook) => hook.typehooks)
+          .sort((a, b) => a.localeCompare(b))
       ),
     ];
     const uniqueBrands = [
       ...new Set(
-        hooks.map((hook) => hook.brand).sort((a, b) => a.localeCompare(b))
+        hooks
+          .filter((hook) => hook.render)
+          .map((hook) => hook.brand)
+          .sort((a, b) => a.localeCompare(b))
       ),
     ];
     const uniqueSeries = [
       ...new Set(
-        hooks.map((hook) => hook.series).sort((a, b) => a.localeCompare(b))
+        hooks
+          .filter((hook) => hook.render)
+          .map((hook) => hook.series)
+          .sort((a, b) => a.localeCompare(b))
       ),
     ];
 
@@ -140,7 +153,7 @@ const HooksList = ({ hooks }) => {
       <div className={styles.hooks__container}>
         <ul className={styles.hooks__list}>
           {currentProducts.map((product) => {
-            if (!product.sale && product.render) {
+            if (product.render) {
               return (
                 <li key={product._id} className={styles.hooks__item}>
                   {product.item && (
@@ -172,17 +185,28 @@ const HooksList = ({ hooks }) => {
                     <li>
                       <p
                         className={`${styles.hooks__price} ${
-                          process.env.NEXT_PUBLIC_SALE_MODE === "true"
+                          process.env.NEXT_PUBLIC_SALE_MODE === "true" ||
+                          product.sale
                             ? styles.sale
                             : ""
                         }`}
                       >{`Ціна: ${calcMainPrice(product.priceMain)} грн`}</p>
                     </li>
-                    {process.env.NEXT_PUBLIC_SALE_MODE === "true" && (
+                    {process.env.NEXT_PUBLIC_SALE_MODE === "true" &&
+                      !product.sale && (
+                        <li>
+                          <p
+                            className={`${styles.hooks__price} ${styles.hooks__price__sale}`}
+                          >{`Ціна: ${calcSalePrice(product.priceMain)} грн`}</p>
+                        </li>
+                      )}
+                    {product.sale && (
                       <li>
                         <p
                           className={`${styles.hooks__price} ${styles.hooks__price__sale}`}
-                        >{`Ціна: ${calcSalePrice(product.priceMain)} грн`}</p>
+                        >{`Ціна: ${calcAlwaysSalePrice(
+                          product.salePriceMain
+                        )} грн`}</p>
                       </li>
                     )}
                   </ul>

@@ -1,7 +1,11 @@
 import BuyButton from "../BuyButton/BuyButton";
 import { Carousel } from "../Carousel/Carousel";
 import styles from "./Reel.module.css";
-import { calcMainPrice, calcSalePrice } from "../../helpers/price-calc";
+import {
+  calcMainPrice,
+  calcSalePrice,
+  calcAlwaysSalePrice,
+} from "../../helpers/price-calc";
 
 const Reel = ({ reel }) => {
   return (
@@ -18,7 +22,7 @@ const Reel = ({ reel }) => {
                 <li>
                   <p
                     className={`${styles.reel__price} ${
-                      process.env.NEXT_PUBLIC_SALE_MODE === "true"
+                      process.env.NEXT_PUBLIC_SALE_MODE === "true" || reel.sale
                         ? styles.sale
                         : ""
                     }`}
@@ -26,11 +30,18 @@ const Reel = ({ reel }) => {
                     {`Ціна: ${calcMainPrice(reel.price)} грн`}
                   </p>
                 </li>
-                {process.env.NEXT_PUBLIC_SALE_MODE === "true" && (
+                {process.env.NEXT_PUBLIC_SALE_MODE === "true" && !reel.sale && (
                   <li>
                     <p
                       className={`${styles.reel__price} ${styles.reel__price__sale}`}
                     >{`Ціна: ${calcSalePrice(reel.price)} грн`}</p>
+                  </li>
+                )}
+                {reel.sale && (
+                  <li>
+                    <p
+                      className={`${styles.reel__price} ${styles.reel__price__sale}`}
+                    >{`Ціна: ${calcAlwaysSalePrice(reel.salePriceMain)} грн`}</p>
                   </li>
                 )}
               </ul>
@@ -43,12 +54,11 @@ const Reel = ({ reel }) => {
 
             {reel.stock && (
               <BuyButton
+                sale={reel.sale}
                 productId={reel._id}
                 productName={`${reel.name} ${reel.brand} ${reel.series} ${reel.model}`}
                 productPrice={
-                  process.env.NEXT_PUBLIC_SALE_MODE === "true"
-                    ? calcSalePrice(reel.price)
-                    : calcMainPrice(reel.price)
+                 reel.sale ? reel.salePriceMain : reel.price
                 }
                 productImg={reel.img[0]}
               />

@@ -7,7 +7,12 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./ReelList.module.css";
 import BuyButton from "../BuyButton/BuyButton";
-import { calcMainPrice, calcSalePrice } from "../../helpers/price-calc";
+import {
+  calcMainPrice,
+  calcSalePrice,
+  calcAlwaysSalePrice,
+} from "../../helpers/price-calc";
+import NoProductsFound from "../NoProductsFound/NoProductsFound";
 
 const ReelsList = ({ reels }) => {
   const [allReels, setAllReels] = useState([]);
@@ -33,22 +38,32 @@ const ReelsList = ({ reels }) => {
   useEffect(() => {
     const uniqueTypereels = [
       ...new Set(
-        reels.map((reel) => reel.typereel).sort((a, b) => a.localeCompare(b))
+        reels
+          .filter((reel) => reel.render)
+          .map((reel) => reel.typereel)
+          .sort((a, b) => a.localeCompare(b))
       ),
     ];
     const uniqueBrands = [
       ...new Set(
-        reels.map((reel) => reel.brand).sort((a, b) => a.localeCompare(b))
+        reels
+          .filter((reel) => reel.render)
+          .map((reel) => reel.brand)
+          .sort((a, b) => a.localeCompare(b))
       ),
     ];
     const uniqueSeries = [
       ...new Set(
-        reels.map((reel) => reel.series).sort((a, b) => a.localeCompare(b))
+        reels
+          .filter((reel) => reel.render)
+          .map((reel) => reel.series)
+          .sort((a, b) => a.localeCompare(b))
       ),
     ];
     const uniqueSpoolSize = [
       ...new Set(
         reels
+          .filter((reel) => reel.render)
           .map((reel) => reel.spoolSize)
           .sort((a, b) => {
             return a - b;
@@ -58,6 +73,7 @@ const ReelsList = ({ reels }) => {
     const uniqueDragMax = [
       ...new Set(
         reels
+          .filter((reel) => reel.render)
           .map((reel) => reel.dragMax)
           .sort((a, b) => {
             return a - b;
@@ -66,12 +82,18 @@ const ReelsList = ({ reels }) => {
     ];
     const uniqueDragSys = [
       ...new Set(
-        reels.map((reel) => reel.dragSys).sort((a, b) => a.localeCompare(b))
+        reels
+          .filter((reel) => reel.render)
+          .map((reel) => reel.dragSys)
+          .sort((a, b) => a.localeCompare(b))
       ),
     ];
     const uniqueBallBearing = [
       ...new Set(
-        reels.map((reel) => reel.ballBearing).sort((a, b) => a.localeCompare(b))
+        reels
+          .filter((reel) => reel.render)
+          .map((reel) => reel.ballBearing)
+          .sort((a, b) => a.localeCompare(b))
       ),
     ];
 
@@ -245,73 +267,87 @@ const ReelsList = ({ reels }) => {
 
       <div className={styles.reels__container}>
         <ul className={styles.reels__list}>
-          {currentProducts.map((product) => (
-            <li key={product._id} className={styles.reels__item}>
-              <p className={styles.reels__article}>Артикль: {product.item}</p>
-              <Link
-                href={`/rybalski-snasti/katushky/${product._id}`}
-                className={styles.reels__link}
-              >
-                <Image
-                  src={product.img[0]}
-                  alt={product.alt}
-                  width={260}
-                  height={260}
-                  className={styles.reels__img}
-                  priority={true}
-                />
-                <h3
-                  className={styles.reels__name}
-                >{`${product.name} ${product.brand} ${product.series} ${product.model}`}</h3>
+          {currentProducts.map((product) => {
+            if (product.render) {
+               return (
+                 <li key={product._id} className={styles.reels__item}>
+                   <p className={styles.reels__article}>
+                     Артикль: {product.item}
+                   </p>
+                   <Link
+                     href={`/rybalski-snasti/katushky/${product._id}`}
+                     className={styles.reels__link}
+                   >
+                     <Image
+                       src={product.img[0]}
+                       alt={product.alt}
+                       width={800}
+                       height={800}
+                       className={styles.reels__img}
+                       priority={true}
+                     />
+                     <h3
+                       className={styles.reels__name}
+                     >{`${product.name} ${product.brand} ${product.series} ${product.model}`}</h3>
 
-                <p className={styles.reels__stock}>
-                  {product.stock ? "В наявності" : "Немає в наявності"}
-                </p>
-              </Link>
-              <div className={styles.price__container}>
-                <ul className={styles.prices__list}>
-                  <li>
-                    <p
-                      className={`${styles.reels__price} ${
-                        process.env.NEXT_PUBLIC_SALE_MODE === "true"
-                          ? styles.sale
-                          : ""
-                      }`}
-                    >
-                      {`Ціна: ${calcMainPrice(product.price)} грн`}
-                    </p>
-                  </li>
-                  {process.env.NEXT_PUBLIC_SALE_MODE === "true" && (
-                    <li
-                      className={`${styles.reels__price} ${styles.reels__price__sale}`}
-                    >
-                      <p>{`Ціна: ${calcSalePrice(product.price)} грн`}</p>
-                    </li>
-                  )}
-                </ul>
+                     <p className={styles.reels__stock}>
+                       {product.stock ? "В наявності" : "Немає в наявності"}
+                     </p>
+                   </Link>
+                   <div className={styles.price__container}>
+                     <ul className={styles.prices__list}>
+                       <li>
+                         <p
+                           className={`${styles.reels__price} ${
+                             process.env.NEXT_PUBLIC_SALE_MODE === "true" ||
+                             product.sale
+                               ? styles.sale
+                               : ""
+                           }`}
+                         >
+                           {`Ціна: ${calcMainPrice(product.price)} грн`}
+                         </p>
+                       </li>
+                       {process.env.NEXT_PUBLIC_SALE_MODE === "true" &&
+                         !product.sale && (
+                           <li
+                             className={`${styles.reels__price} ${styles.reels__price__sale}`}
+                           >
+                             <p>{`Ціна: ${calcSalePrice(
+                               product.price
+                             )} грн`}</p>
+                           </li>
+                         )}
+                       {product.sale && (
+                         <li
+                           className={`${styles.reels__price} ${styles.reels__price__sale}`}
+                         >
+                           <p>{`Ціна: ${calcAlwaysSalePrice(
+                             product.salePriceMain
+                           )} грн`}</p>
+                         </li>
+                       )}
+                     </ul>
 
-                {product.stock && (
-                  <BuyButton
-                    productId={product._id}
-                    productName={`${product.name} ${product.brand} ${product.series} ${product.model}`}
-                    productPrice={
-                      process.env.NEXT_PUBLIC_SALE_MODE === "true"
-                        ? calcSalePrice(product.price)
-                        : calcMainPrice(product.price)
-                    }
-                    productImg={product.img[0]}
-                  />
-                )}
-              </div>
-            </li>
-          ))}
+                     {product.stock && (
+                       <BuyButton
+                         sale={product.sale}
+                         productId={product._id}
+                         productName={`${product.name} ${product.brand} ${product.series} ${product.model}`}
+                         productPrice={
+                           product.sale ? product.salePriceMain : product.price
+                         }
+                         productImg={product.img[0]}
+                       />
+                     )}
+                   </div>
+                 </li>
+               );
+            }
+            return;
+          })}
         </ul>
-        {currentProducts.length === 0 && (
-          <p className={styles.reels__none}>
-            Вибачте, але товарів за обраними фільтрами не знайдено. Спробуйте
-            змінити запит.
-          </p>
-        )}
+        {currentProducts.length === 0 && <NoProductsFound />}
 
         {currentPage !== totalPages && currentPage < totalPages && (
           <ButtonMore onClick={loadMoreItems} />

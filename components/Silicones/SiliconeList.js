@@ -7,7 +7,11 @@ import Filters from "../Filters/Filters";
 import MobileFiltersContainer from "../Filters/MobileFiltersContainer";
 import BuyButton from "../BuyButton/BuyButton";
 import ButtonMore from "../ButtonMore/ButtonMore";
-import { calcMainPrice, calcSalePrice } from "../../helpers/price-calc";
+import {
+  calcMainPrice,
+  calcSalePrice,
+  calcAlwaysSalePrice,
+} from "../../helpers/price-calc";
 import NoProductsFound from "../NoProductsFound/NoProductsFound";
 
 const SiliconesList = ({ silicones }) => {
@@ -30,37 +34,48 @@ const SiliconesList = ({ silicones }) => {
      useEffect(() => {
        const uniqueLurestype = [
          ...new Set(
-           silicones.map((silicone) => silicone.lurestype).sort((a, b) => a.localeCompare(b))
+           silicones
+             .filter((silicone) => silicone.render)
+             .map((silicone) => silicone.lurestype)
+             .sort((a, b) => a.localeCompare(b))
          ),
        ];
        const uniqueBrands = [
          ...new Set(
-           silicones.map((silicone) => silicone.brand).sort((a, b) => a.localeCompare(b))
+           silicones
+             .filter((silicone) => silicone.render)
+             .map((silicone) => silicone.brand)
+             .sort((a, b) => a.localeCompare(b))
          ),
        ];
        const uniqueSeries = [
          ...new Set(
-           silicones.map((silicone) => silicone.series).sort((a, b) => a.localeCompare(b))
+           silicones
+             .filter((silicone) => silicone.render)
+             .map((silicone) => silicone.series)
+             .sort((a, b) => a.localeCompare(b))
          ),
        ];
        const uniqueSize = [
-           ...new Set(
-             silicones
-               .map((silicone) => silicone.size)
-               .sort((a, b) => {
-                 return a - b;
-               })
-           ),
-        ];
+         ...new Set(
+           silicones
+             .filter((silicone) => silicone.render)
+             .map((silicone) => silicone.size)
+             .sort((a, b) => {
+               return a - b;
+             })
+         ),
+       ];
       const uniqueWeight = [
-               ...new Set(
-                 silicones
-                   .map((silicone) => silicone.weight)
-                   .sort((a, b) => {
-                     return a - b;
-                   })
-               ),
-        ];
+        ...new Set(
+          silicones
+            .filter((silicone) => silicone.render)
+            .map((silicone) => silicone.weight)
+            .sort((a, b) => {
+              return a - b;
+            })
+        ),
+      ];
         
        setLurestypeFilters(uniqueLurestype);
        setBrandsFilters(uniqueBrands);
@@ -209,56 +224,71 @@ const SiliconesList = ({ silicones }) => {
 
         <div className={styles.silicones__container}>
           <ul className={styles.silicones__list}>
-            {currentProducts.map((product) => (
-              <li key={product._id} className={styles.silicones__item}>
-                {product.item && (
-                  <p className={styles.silicones__article}>
-                    Артикль: {product.item}
-                  </p>
-                )}
-                <Link
-                  href={`/prymanky-ta-prykormky/sylikon/${product._id}`}
-                  className={styles.silicones__link}
-                >
-                  <Image
-                    src={product.imgMain}
-                    alt={product.alt}
-                    width={260}
-                    height={260}
-                    className={styles.silicones__img}
-                    priority={true}
-                  />
-                  <h3
-                    className={styles.silicones__name}
-                  >{`${product.name} ${product.brand} ${product.series} ${product.model}"`}</h3>
+            {currentProducts.map((product) => {
+              if (product.render) {
+                return (
+                  <li key={product._id} className={styles.silicones__item}>
+                    {product.item && (
+                      <p className={styles.silicones__article}>
+                        Артикль: {product.item}
+                      </p>
+                    )}
+                    <Link
+                      href={`/prymanky-ta-prykormky/sylikon/${product._id}`}
+                      className={styles.silicones__link}
+                    >
+                      <Image
+                        src={product.imgMain}
+                        alt={product.alt}
+                        width={260}
+                        height={260}
+                        className={styles.silicones__img}
+                        priority={true}
+                      />
+                      <h3
+                        className={styles.silicones__name}
+                      >{`${product.name} ${product.brand} ${product.series} ${product.model}"`}</h3>
 
-                  <p className={styles.silicones__stock}>
-                    {product.stock ? "В наявності" : "Немає в наявності"}
-                  </p>
-                </Link>
-                <ul className={styles.prices__list}>
-                  <li>
-                    <p
-                      className={`${styles.silicones__price} ${
-                        process.env.NEXT_PUBLIC_SALE_MODE === "true"
-                          ? styles.sale
-                          : ""
-                      }`}
-                    >{`Ціна: ${calcMainPrice(product.price)} грн`}</p>
+                      <p className={styles.silicones__stock}>
+                        {product.stock ? "В наявності" : "Немає в наявності"}
+                      </p>
+                    </Link>
+                    <ul className={styles.prices__list}>
+                      <li>
+                        <p
+                          className={`${styles.silicones__price} ${
+                            process.env.NEXT_PUBLIC_SALE_MODE === "true" ||
+                            product.sale
+                              ? styles.sale
+                              : ""
+                          }`}
+                        >{`Ціна: ${calcMainPrice(product.price)} грн`}</p>
+                      </li>
+                      {process.env.NEXT_PUBLIC_SALE_MODE === "true" &&
+                        !product.sale && (
+                          <li>
+                            <p
+                              className={`${styles.silicones__price} ${styles.silicones__price__sale}`}
+                            >{`Ціна: ${calcSalePrice(product.price)} грн`}</p>
+                          </li>
+                        )}
+                      {product.sale && (
+                        <li>
+                          <p
+                            className={`${styles.silicones__price} ${styles.silicones__price__sale}`}
+                          >{`Ціна: ${calcAlwaysSalePrice(
+                            product.salePriceMain
+                          )} грн`}</p>
+                        </li>
+                      )}
+                    </ul>
                   </li>
-                  {process.env.NEXT_PUBLIC_SALE_MODE === "true" && (
-                    <li>
-                      <p
-                        className={`${styles.silicones__price} ${styles.silicones__price__sale}`}>{`Ціна: ${calcSalePrice(product.price)} грн`}</p>
-                    </li>
-                  )}
-                </ul>
-              </li>
-            ))}
+                );
+              }
+              return;
+            })}
           </ul>
-          {currentProducts.length === 0 && (
-           <NoProductsFound />
-          )}
+          {currentProducts.length === 0 && <NoProductsFound />}
 
           {currentPage !== totalPages && currentPage < totalPages && (
             <ButtonMore onClick={loadMoreItems} />

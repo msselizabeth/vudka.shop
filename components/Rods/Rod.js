@@ -1,4 +1,8 @@
-import { calcMainPrice, calcSalePrice } from "../../helpers/price-calc";
+import {
+  calcMainPrice,
+  calcSalePrice,
+  calcAlwaysSalePrice,
+} from "../../helpers/price-calc";
 import BuyButton from "../BuyButton/BuyButton";
 import { Carousel } from "../Carousel/Carousel";
 import styles from "./Rod.module.css";
@@ -20,7 +24,7 @@ const Rod = ({ rod }) => {
                 <li>
                   <p
                     className={`${styles.rod__price} ${
-                      process.env.NEXT_PUBLIC_SALE_MODE === "true"
+                      process.env.NEXT_PUBLIC_SALE_MODE === "true" || rod.sale
                         ? styles.sale
                         : ""
                     }`}
@@ -28,11 +32,18 @@ const Rod = ({ rod }) => {
                     {`Ціна: ${calcMainPrice(rod.price)} грн`}
                   </p>
                 </li>
-                {process.env.NEXT_PUBLIC_SALE_MODE === "true" && (
+                {process.env.NEXT_PUBLIC_SALE_MODE === "true" && !rod.sale && (
                   <li>
                     <p
                       className={`${styles.rod__price} ${styles.rod__price__sale}`}
                     >{`Ціна: ${calcSalePrice(rod.price)} грн`}</p>
+                  </li>
+                )}
+                {rod.sale && (
+                  <li>
+                    <p
+                      className={`${styles.rod__price} ${styles.rod__price__sale}`}
+                    >{`Ціна: ${calcAlwaysSalePrice(rod.salePriceMain)} грн`}</p>
                   </li>
                 )}
               </ul>
@@ -45,17 +56,14 @@ const Rod = ({ rod }) => {
 
             {rod.stock && (
               <BuyButton
+                sale={rod.sale}
                 productId={rod._id}
                 productName={`${rod.name} ${rod.brand} ${rod.series} ${
                   rod.model
                 } ${rod.rodSize}см ${
                   rod.testMin && `${rod.testMin}-${rod.testMax}г`
                 }`}
-                productPrice={
-                  process.env.NEXT_PUBLIC_SALE_MODE === "true"
-                    ? calcSalePrice(rod.price)
-                    : calcMainPrice(rod.price)
-                }
+                productPrice={rod.sale ? rod.salePriceMain : rod.price}
                 productImg={rod.img[0]}
               />
             )}
