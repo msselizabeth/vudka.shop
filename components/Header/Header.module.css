@@ -185,8 +185,9 @@
     .dropdown__content {
         display: none;
         position: absolute;
+        padding: 7px;
         background-image: var(--header-gradient);
-        min-width: 300px;
+        min-width: 320px;
         border-radius: 20px;
         box-shadow: 0 8px 16px var(--box-shadow-color);
         z-index: 1;
@@ -197,7 +198,7 @@
         display: flex;
         flex-wrap: wrap;
         color: var(--primary-links-color);
-        padding: 8px;
+        padding: 7px;
         border-radius: 15px;
         text-decoration: none;
         transition: var(--transition);

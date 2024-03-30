@@ -206,10 +206,10 @@ const Cart = () => {
                   className={styles.cart__products__img}
                 />
                 <div className={styles.cart__products__info__box}>
-                  <p>
-                    {item.productName} - {currentPrice(item.productPrice, item.sale)}
-                    грн.
+                  <p className={styles.cart__products__productName}>
+                    {item.productName}
                   </p>
+                  <p>Ціна за 1шт. - {currentPrice(item.productPrice, item.sale)}грн.</p>
                   <p className={styles.cart__products__qnt}>
                     Кількість:
                     <button
@@ -241,7 +241,7 @@ const Cart = () => {
                     </button>
                   </p>
                   <p className={styles.cart__products__totalProdPrice}>
-                    Всього:
+                    Всього:{" "}
                     {(currentPrice(item.productPrice, item.sale) * item.quantity).toFixed(
                       2
                     )}{" "}

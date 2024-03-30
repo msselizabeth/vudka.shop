@@ -53,6 +53,9 @@
     flex-direction: column;
     gap: 5px;
 }
+.cart__products__productName{
+    font-weight: 500;
+}
 .cart__products__qnt{
     display: flex;
     align-items: center;
@@ -285,7 +288,7 @@
 
 @media screen and (min-width:1024px) {
     .cart__products__list {
-        width: 550px;
+        width: 850px;
         gap: 17px;
         margin: 0;
         padding-top: 25px;
@@ -298,7 +301,7 @@
     }
 
     .cart__products__item {
-        width: 550px;
+        width: 850px;
         gap: 15px;
     }
 
